@@ -14,6 +14,7 @@ PHP-Teamwork
 1. Tools
 	- GitHub
 	- PHP
+	- MySQL
 	- HTML 5 
 	- CSS 3
 		- CSS Framework
@@ -23,12 +24,35 @@ PHP-Teamwork
 	- Firefox - [Useful toolbar for Firefox and Chrome](http://chrispederick.com/work/web-developer/)
 
 2. Structure
-	- Homepage
-		- Navigation
-		- Slider
-	- Subpages
-		- Gallery
-		- Contact Form...
+	- Database tables
+		- Users
+			- ID
+			- First Name
+			- Last Name
+			- Access Level
+			- E-mail
+			- Password
+		- Blog Posts
+			- ID
+			- Title
+			- Post
+			- Author ID
+			- Date Posted
+		- Tags
+			- ID
+			- Name
+		- Post Tags
+			- Blog Post ID
+			- Tag ID
+	- HTML
+		- Homepage
+			- Navigation
+			- Slider
+		- Blog Posts
+		- Subpages
+			- About
+			- Gallery
+			- Contact Form...
 
 3. Content Ideas - deadline: **09.12.2014**
 			Idea - 
