@@ -19,55 +19,9 @@ if(isset($_POST['name'])) {
     }
 }
 
+$element = 'views/elements/add_category_form.php';
+include_once DX_ROOT_DIR . 'views/templates/default_template.php';
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8"/>
-    <meta http-equiv="x-ua-compatible" content="IE=edge, chrome=1"/>
-    <style>
-        ul {
-            list-style-type: none;
-        }
-        li {
-            display: inline;
-            margin-right: 20px;
-        }
-    </style>
-    <title>Team San Diego's Blog</title>
-</head>
-<body>
-<nav>
-    <ul>
-        <li><a href="index.php">Index</a></li>
-        <li><a href="add_post.php">Add a Post</a></li>
-        <li><a href="add_category.php">Add a Category</a></li>
-        <li><a href="category_list.php">Category List</a></li>
-    </ul>
-</nav>
 
-<h1>Add a Category</h1>
-    <?php
-    if(isset($error)) {
-        echo "<p>$error</p>";
-    }
-    ?>
-
-    <form action="" method="post">
-        <div>
-            <label for="name">Name: </label>
-            <input type="text" name="name" id="name"/>
-        </div>
-        <br/>
-        <div>
-            <input type="submit" value="Add Category"/>
-        </div>
-    </form>
-</body>
-</html>
-
-<?php
-  
-?>
  
