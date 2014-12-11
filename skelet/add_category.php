@@ -15,22 +15,39 @@ if(isset($_POST['name'])) {
 
     if(!isset($error)) {
         add_category($name);
+        header('Location: add_post.php');
     }
 }
 
 ?>
 
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="x-ua-compatible" content="IE=edge, chrome=1"/>
-    <title>Add a Category</title>
+    <style>
+        ul {
+            list-style-type: none;
+        }
+        li {
+            display: inline;
+            margin-right: 20px;
+        }
+    </style>
+    <title>Team San Diego's Blog</title>
 </head>
 <body>
-    <h1>Add a Category</h1>
+<nav>
+    <ul>
+        <li><a href="index.php">Index</a></li>
+        <li><a href="add_post.php">Add a Post</a></li>
+        <li><a href="add_category.php">Add a Category</a></li>
+        <li><a href="category_list.php">Category List</a></li>
+    </ul>
+</nav>
 
+<h1>Add a Category</h1>
     <?php
     if(isset($error)) {
         echo "<p>$error</p>";
