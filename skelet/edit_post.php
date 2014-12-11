@@ -28,7 +28,8 @@ if(isset($_POST['title'], $_POST['contents'], $_POST['category'])) {
     }
 
     if(empty($errors)) {
-        edit_post($_GET['id'], $title, $contents, $_POST['category']);
+        edit_post($_GET['id'], $title, $contents, $_POST['category'])
+            or die(mysql_error());
 
         header("Location: index.php?id={$post[0]['post_id']}");
         die();

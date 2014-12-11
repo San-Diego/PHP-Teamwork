@@ -14,16 +14,16 @@ function add_post($title, $contents, $category)
 
 function edit_post($title, $contents, $category)
 {
-    $id = (int)$id;
+    $id = (int)$_GET['id'];
     $title = mysql_real_escape_string($title);
     $contents = mysql_real_escape_string($contents);
     $category = (int)$category;
 
     mysql_query("UPDATE `posts` SET
-                  `cat_id` = '{$category}',
+                  `cat_id` = {$category},
                   `title` = '{$title}',
                   `contents` = '{$contents}',
-                  WHERE `id` = '{$id}'");
+                  WHERE `id` = {$id}");
 }
 
 function add_category($name)
@@ -38,7 +38,7 @@ function delete($table, $id)
     $table = mysql_real_escape_string($table);
     $id = (int)$id;
 
-    mysql_query("DELETE FROM '{$table}' WHERE `id`='{$id}'");
+    mysql_query("DELETE FROM {$table} WHERE `id`={$id}");
 }
 
 function get_posts($id = null, $cat_id = null)
