@@ -5,7 +5,6 @@ require_once('resources/init.php');
 $element = 'views/elements/login_form.php';
 include_once DX_ROOT_DIR . 'views/templates/default_template.php';
 
-
 $submitted_username = '';
 
 if(!empty($_POST)) {
