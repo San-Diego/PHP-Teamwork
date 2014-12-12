@@ -127,3 +127,52 @@ Version: '5.6.21'  socket: ''  port: 3306  MySQL Community Server (GPL)
 2014-12-12 20:04:19 3476 [Note] Event Scheduler: Loaded 0 events
 2014-12-12 20:04:19 3476 [Note] c:\xampp\mysql\bin\mysqld.exe: ready for connections.
 Version: '5.6.21'  socket: ''  port: 3306  MySQL Community Server (GPL)
+2014-12-12 20:59:07 9440 [Note] Plugin 'FEDERATED' is disabled.
+2014-12-12 20:59:07 2738 InnoDB: Warning: Using innodb_additional_mem_pool_size is DEPRECATED. This option may be removed in future releases, together with the option innodb_use_sys_malloc and with the InnoDB's internal memory allocator.
+2014-12-12 20:59:07 9440 [Note] InnoDB: Using atomics to ref count buffer pool pages
+2014-12-12 20:59:07 9440 [Note] InnoDB: The InnoDB memory heap is disabled
+2014-12-12 20:59:07 9440 [Note] InnoDB: Mutexes and rw_locks use Windows interlocked functions
+2014-12-12 20:59:07 9440 [Note] InnoDB: Compressed tables use zlib 1.2.3
+2014-12-12 20:59:07 9440 [Note] InnoDB: Not using CPU crc32 instructions
+2014-12-12 20:59:07 9440 [Note] InnoDB: Initializing buffer pool, size = 16.0M
+2014-12-12 20:59:07 9440 [Note] InnoDB: Completed initialization of buffer pool
+2014-12-12 20:59:07 9440 [Note] InnoDB: Highest supported file format is Barracuda.
+2014-12-12 20:59:07 9440 [Note] InnoDB: The log sequence numbers 1625987 and 1625987 in ibdata files do not match the log sequence number 1850245 in the ib_logfiles!
+2014-12-12 20:59:07 9440 [Note] InnoDB: Database was not shutdown normally!
+2014-12-12 20:59:07 9440 [Note] InnoDB: Starting crash recovery.
+2014-12-12 20:59:07 9440 [Note] InnoDB: Reading tablespace information from the .ibd files...
+2014-12-12 20:59:07 9440 [Note] InnoDB: Restoring possible half-written data pages 
+2014-12-12 20:59:07 9440 [Note] InnoDB: from the doublewrite buffer...
+2014-12-12 20:59:08 9440 [ERROR] InnoDB: Table blog/categories in the InnoDB data dictionary has tablespace id 12, but tablespace with that id or name does not exist. Have you deleted or moved .ibd files? This may also be a table created with CREATE TEMPORARY TABLE whose .ibd and .frm files MySQL automatically removed, but the table still exists in the InnoDB internal data dictionary.
+InnoDB: Please refer to
+InnoDB: http://dev.mysql.com/doc/refman/5.6/en/innodb-troubleshooting-datadict.html
+InnoDB: for how to resolve the issue.
+2014-12-12 20:59:08 9440 [ERROR] InnoDB: Table blog/posts in the InnoDB data dictionary has tablespace id 13, but tablespace with that id or name does not exist. Have you deleted or moved .ibd files? This may also be a table created with CREATE TEMPORARY TABLE whose .ibd and .frm files MySQL automatically removed, but the table still exists in the InnoDB internal data dictionary.
+InnoDB: Please refer to
+InnoDB: http://dev.mysql.com/doc/refman/5.6/en/innodb-troubleshooting-datadict.html
+InnoDB: for how to resolve the issue.
+2014-12-12 20:59:08 9440 [ERROR] InnoDB: Table blog_project/categories in the InnoDB data dictionary has tablespace id 14, but tablespace with that id or name does not exist. Have you deleted or moved .ibd files? This may also be a table created with CREATE TEMPORARY TABLE whose .ibd and .frm files MySQL automatically removed, but the table still exists in the InnoDB internal data dictionary.
+InnoDB: Please refer to
+InnoDB: http://dev.mysql.com/doc/refman/5.6/en/innodb-troubleshooting-datadict.html
+InnoDB: for how to resolve the issue.
+2014-12-12 20:59:08 9440 [ERROR] InnoDB: Table blog_project/posts in the InnoDB data dictionary has tablespace id 15, but tablespace with that id or name does not exist. Have you deleted or moved .ibd files? This may also be a table created with CREATE TEMPORARY TABLE whose .ibd and .frm files MySQL automatically removed, but the table still exists in the InnoDB internal data dictionary.
+InnoDB: Please refer to
+InnoDB: http://dev.mysql.com/doc/refman/5.6/en/innodb-troubleshooting-datadict.html
+InnoDB: for how to resolve the issue.
+2014-12-12 20:59:08 9440 [Note] InnoDB: 128 rollback segment(s) are active.
+2014-12-12 20:59:08 9440 [Note] InnoDB: Waiting for purge to start
+2014-12-12 20:59:08 9440 [ERROR] InnoDB: Failed to find tablespace for table '"blog_project"."posts"' in the cache. Attempting to load the tablespace with space id 15.
+2014-12-12 20:59:08 2750  InnoDB: Operating system error number 2 in a file operation.
+InnoDB: Some operating system error numbers are described at
+InnoDB: http://dev.mysql.com/doc/refman/5.6/en/operating-system-error-codes.html
+2014-12-12 20:59:08 9440 [ERROR] InnoDB: Could not find a valid tablespace file for 'blog_project/posts'. See http://dev.mysql.com/doc/refman/5.6/en/innodb-troubleshooting-datadict.html for how to resolve the issue.
+2014-12-12 20:59:08 9440 [ERROR] InnoDB: Failed to find tablespace for table '"blog_project"."categories"' in the cache. Attempting to load the tablespace with space id 14.
+2014-12-12 20:59:08 2750  InnoDB: Operating system error number 2 in a file operation.
+InnoDB: Some operating system error numbers are described at
+InnoDB: http://dev.mysql.com/doc/refman/5.6/en/operating-system-error-codes.html
+2014-12-12 20:59:08 9440 [ERROR] InnoDB: Could not find a valid tablespace file for 'blog_project/categories'. See http://dev.mysql.com/doc/refman/5.6/en/innodb-troubleshooting-datadict.html for how to resolve the issue.
+2014-12-12 20:59:08 9440 [Note] InnoDB: 5.6.16 started; log sequence number 1850245
+2014-12-12 20:59:08 9440 [Note] Server hostname (bind-address): '*'; port: 3306
+2014-12-12 20:59:08 9440 [Note] IPv6 is available.
+2014-12-12 20:59:08 9440 [Note]   - '::' resolves to '::';
+2014-12-12 20:59:08 9440 [Note] Server socket created on IP: '::'.
