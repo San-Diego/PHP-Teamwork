@@ -8,4 +8,10 @@
             <li><a href="category_list.php">Category List</a></li>
         </ul>
     </nav>
+    <?php if(isset($_SESSION["user"])): ?>
+    <div>
+        <a href="logout.php">Log out</a><br />
+        <span>User name: <?php echo $_SESSION["user"]["username"] ?></span>
+    </div>
+    <?php endif ?>
 </header>

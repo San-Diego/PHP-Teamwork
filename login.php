@@ -1,6 +1,10 @@
 <?php
 require_once('resources/init.php');
 
+if(isset($_SESSION['user'])) {
+    header('Location: index.php');
+    die('Already logged in, redirecting to index.php');
+}
 
 $element = 'views/elements/login_form.php';
 include_once DX_ROOT_DIR . 'views/templates/default_template.php';
