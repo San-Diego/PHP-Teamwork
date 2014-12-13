@@ -19,6 +19,16 @@
             <?php endforeach; ?>
         </select>
     </div>
+	    <div>
+        <label for="tags">Tags: </label>
+        <select name="tags" id="tags">
+            <?php
+            foreach (get_tags() as $tags):
+                ?>
+                <option value="<?=$tags['id']?>"><?=$tags['name']?></option>
+            <?php endforeach; ?>
+        </select>
+    </div>
     <div>
         <input type="submit" value="Add Post"/>
     </div>
