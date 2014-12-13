@@ -21,13 +21,7 @@
     </div>
 	    <div>
         <label for="tags">Tags: </label>
-        <select name="tags" id="tags">
-            <?php
-            foreach (get_tags() as $tags):
-                ?>
-                <option value="<?=$tags['id']?>"><?=$tags['name']?></option>
-            <?php endforeach; ?>
-        </select>
+        <input type="text" id="tags" name="tags" value="<?php if(isset($_POST['tags'])) echo $_POST['tags'] ?>"/>
     </div>
     <div>
         <input type="submit" value="Add Post"/>
