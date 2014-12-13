@@ -18,7 +18,6 @@ if(!empty($_POST)) {
                 id,
                 username,
                 password,
-                salt,
                 email
             FROM users
             WHERE
