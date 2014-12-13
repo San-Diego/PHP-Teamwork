@@ -109,6 +109,35 @@ function get_posts($id = null, $cat_id = null)
     return $posts;
 }
 
+function category_exist($name, $db)
+{
+	 $query = "
+	 SELECT
+	 1
+	 FROM cat
+	 WHERE
+	 name = :username
+	 ";
+
+	 $query_params = array(
+	 ':username' => $name
+	 );
+
+	 try {
+	 $stmt = $db->prepare($query);
+	 $result = $stmt->execute($query_params);
+	 } catch (PDOException $ex) {
+	 // remove getMessage on production
+	 die("Failed to run query: " . $ex->getMessage());
+	 }
+
+	 $row = $stmt->fetch();
+	 if ($row) {
+	 return true;
+	 }
+	 return false;
+}
+
 function get_categories($db)
 {
     $query = "
