@@ -12,9 +12,10 @@
         <label for="category">Category: </label>
         <select name="category" id="category">
             <?php
-            foreach (get_categories() as $category):
+            $categories = get_categories($db);
+            foreach ($categories as $category):
                 ?>
-                <option value="<?=$category['id']?>"><?=$category['name']?></option>
+                <option value="<?php echo htmlentities($category['name']) ?>"><?php echo htmlentities($category['name']) ?></option>
             <?php endforeach; ?>
         </select>
     </div>

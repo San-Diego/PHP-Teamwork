@@ -26,11 +26,30 @@ function edit_post($title, $contents, $category)
                   WHERE `id` = {$id}");
 }
 
-function add_category($name)
+function add_category($name, $db)
 {
-    $name = mysql_real_escape_string($name);
+    $query = "
+            INSERT INTO cat (
+                name
+            ) VALUES (
+                :name
+            )
+        ";
 
-    mysql_query("INSERT INTO `categories` SET `name` = '{$name}'");
+    $query_params = array(
+        ':name' => $name
+    );
+
+    try
+    {
+        // Execute the query to create the user
+        $stmt = $db->prepare($query);
+        $result = $stmt->execute($query_params);
+    }
+    catch(PDOException $ex)
+    {
+        die("Failed to run query: " . $ex->getMessage());
+    }
 }
 
 function delete($table, $id)
@@ -72,31 +91,53 @@ function get_posts($id = null, $cat_id = null)
     return $posts;
 }
 
-function get_categories($id = null)
+function get_categories($db)
 {
-    $categories = array();
+    $query = "
+            SELECT
+                name
+            FROM cat
+        ";
 
-    $query = mysql_query("SELECT `id`, `name` FROM `categories`");
-
-    while($row = mysql_fetch_assoc($query)) {
-        $categories[] = $row;
+    try {
+        $stmt = $db->prepare($query);
+        $stmt->execute();
+    } catch (PDOException $ex) {
+        // remove getMessage on production
+        die("Failed to run query: " . $ex->getMessage());
     }
 
-    return $categories;
-
+    $rows = $stmt->fetchAll();
+    return $rows;
 }
 
-function category_exist($field, $value)
+function category_exist($name, $db)
 {
-    $field = mysql_real_escape_string($field);
-    $value = mysql_real_escape_string($value);
+    $query = "
+            SELECT
+                1
+            FROM cat
+            WHERE
+                name = :username
+        ";
 
+    $query_params = array(
+        ':username' => $name
+    );
 
-    $query = mysql_query("SELECT COUNT(1) FROM `categories` WHERE `{$field}`='{$value}'");
+    try {
+        $stmt = $db->prepare($query);
+        $result = $stmt->execute($query_params);
+    } catch (PDOException $ex) {
+        // remove getMessage on production
+        die("Failed to run query: " . $ex->getMessage());
+    }
 
-    echo mysql_error();
-
-    return(mysql_result($query, 0) == '0') ? false : true;
+    $row = $stmt->fetch();
+    if ($row) {
+        return true;
+    }
+    return false;
 }
 
 
