@@ -1,7 +1,6 @@
 <?php
 
 require_once('resources/init.php');
-
 if(isset($_POST['title'], $_POST['contents'], $_POST['category'])) {
 
     $errors = array();
@@ -22,15 +21,11 @@ if(isset($_POST['title'], $_POST['contents'], $_POST['category'])) {
         $errors[] = 'You need to supply some text';
     }
 
-    if (!category_exist('id', $_POST['category'])) {
-        $errors[] = 'That category does not exist';
-    }
+   
 
     if (empty($errors)) {
-        add_post($title, $contents, $_POST['category']);
-
+		add_post($db,$title,$contents,$_SESSION['user']['id'],$_POST['category'],time());
         $id = mysql_insert_id();
-
         header("Location: index.php?id={$id}");
         die();
     }
