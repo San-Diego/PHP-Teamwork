@@ -15,19 +15,13 @@
             $categories = get_categories($db);
             foreach ($categories as $category):
                 ?>
-                <option value="<?php echo htmlentities($category['name']) ?>"><?php echo htmlentities($category['name']) ?></option>
+                <option value="<?php echo htmlentities($category['id']) ?>"><?php echo htmlentities($category['name']) ?></option>
             <?php endforeach; ?>
         </select>
     </div>
 	    <div>
         <label for="tags">Tags: </label>
-        <select name="tags" id="tags">
-            <?php
-            foreach (get_tags() as $tags):
-                ?>
-                <option value="<?=$tags['id']?>"><?=$tags['name']?></option>
-            <?php endforeach; ?>
-        </select>
+        <input type="text" id="tags" name="tags" value="<?php if(isset($_POST['tags'])) echo $_POST['tags'] ?>"/>
     </div>
     <div>
         <input type="submit" value="Add Post"/>

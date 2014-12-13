@@ -1,15 +1,25 @@
 <?php
 
-function add_post($title, $contents, $category)
+function add_post($db,$title,$contents,$by,$cat,$time)
 {
     $title = mysql_real_escape_string($title);
     $contents = mysql_real_escape_string($contents);
-    $category = (int)$category;
-    mysql_query("INSERT INTO `posts` SET
-                    `cat_id` = '{$category}',
+	$query = "INSERT INTO `posts` SET
                     `title` = '{$title}',
-                    `contents` = '{$contents}',
-                    `date_posted` = NOW() ");
+                    `article` = '{$contents}',
+					`by` = '{$by}',
+					cat_id = '{$cat}',
+                    `date` = '{$time}' ";
+					
+	try
+    {
+        // Execute the query to create the user
+        $stmt = $db->prepare($query);
+        $result = $stmt->execute($query_params);
+    }catch(PDOException $ex)
+    {
+        die("Failed to run query: " . $ex->getMessage());
+    }
 }
 
 function edit_post($title, $contents, $category)
@@ -103,7 +113,7 @@ function get_categories($db)
 {
     $query = "
             SELECT
-                name, id
+                id, name
             FROM cat
         ";
 
@@ -117,35 +127,6 @@ function get_categories($db)
 
     $rows = $stmt->fetchAll();
     return $rows;
-}
-
-function category_exist($name, $db)
-{
-    $query = "
-            SELECT
-                1
-            FROM cat
-            WHERE
-                name = :username
-        ";
-
-    $query_params = array(
-        ':username' => $name
-    );
-
-    try {
-        $stmt = $db->prepare($query);
-        $result = $stmt->execute($query_params);
-    } catch (PDOException $ex) {
-        // remove getMessage on production
-        die("Failed to run query: " . $ex->getMessage());
-    }
-
-    $row = $stmt->fetch();
-    if ($row) {
-        return true;
-    }
-    return false;
 }
 
 
