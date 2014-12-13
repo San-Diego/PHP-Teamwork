@@ -52,12 +52,20 @@ function add_category($name, $db)
     }
 }
 
-function delete($table, $id)
+function delete($table, $id, $db)
 {
-    $table = mysql_real_escape_string($table);
-    $id = (int)$id;
+    $query = "
+            DELETE FROM {$table}
+            WHERE id={$id}
+        ";
 
-    mysql_query("DELETE FROM {$table} WHERE `id`={$id}");
+    try {
+        $stmt = $db->prepare($query);
+        $stmt->execute();
+    } catch (PDOException $ex) {
+        // remove getMessage on production
+        die("Failed to run query: " . $ex->getMessage());
+    }
 }
 
 function get_posts($id = null, $cat_id = null)
@@ -95,7 +103,7 @@ function get_categories($db)
 {
     $query = "
             SELECT
-                name
+                name, id
             FROM cat
         ";
 

@@ -7,7 +7,7 @@ if(!isset($_GET['id'])) {
     die();
 }
 
-delete('categories', $_GET['id']);
+delete('cat', $_GET['id'], $db);
 
 header('Location: category_list.php');
 die();
