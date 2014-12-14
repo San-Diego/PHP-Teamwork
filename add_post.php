@@ -6,7 +6,7 @@ if(isset($_POST['title'], $_POST['contents'], $_POST['category'], $_POST['tags']
     $errors = array();
 
     $title = trim($_POST['title']);
-    $tags = explode(", ", trim($_POST['tags']));
+    $tags = explode(", ", strtolower(trim($_POST['tags'])));
     $contents = trim($_POST['contents']);
 
     if (empty($title)) {
