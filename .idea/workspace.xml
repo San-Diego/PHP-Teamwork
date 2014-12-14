@@ -38,19 +38,20 @@
       <file leaf-file-name="blog.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resources/func/blog.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.233526" vertical-offset="2671" max-vertical-offset="3536">
-              <caret line="169" column="17" selection-start-line="169" selection-start-column="17" selection-end-line="169" selection-end-column="17" />
+            <state vertical-scroll-proportion="0.15491329" vertical-offset="2654" max-vertical-offset="3536">
+              <caret line="164" column="33" selection-start-line="164" selection-start-column="33" selection-end-line="164" selection-end-column="33" />
               <folding>
-                <marker date="1418547535550" expanded="true" signature="175:371" placeholder="INSERT INTO ..." />
-                <marker date="1418547535550" expanded="true" signature="1111:1208" placeholder="INSERT INTO ..." />
-                <marker date="1418547535550" expanded="true" signature="1600:1642" placeholder="DELETE FROM ..." />
-                <marker date="1418547535550" expanded="true" signature="1963:2234" placeholder="SELECT `post..." />
-                <marker date="1418547535550" expanded="true" signature="2686:2734" placeholder="SELECT 1 FRO..cat..." />
-                <marker date="1418547535550" expanded="true" signature="3138:3190" placeholder="SELECT id, n..cat..." />
-                <marker date="1418547535550" expanded="true" signature="3563:3596" placeholder="SELECT id FR..tags..." />
-                <marker date="1418547535550" expanded="true" signature="3563:3600" placeholder="SELECT id FR..tags..." />
-                <marker date="1418547535550" expanded="true" signature="3669:3709" placeholder="INSERT INTO ..." />
-                <marker date="1418547535550" expanded="true" signature="3733:3773" placeholder="/* Execute t..." />
+                <marker date="1418548493301" expanded="true" signature="175:371" placeholder="INSERT INTO ..." />
+                <marker date="1418548493301" expanded="true" signature="1111:1208" placeholder="INSERT INTO ..." />
+                <marker date="1418548493301" expanded="true" signature="1600:1642" placeholder="DELETE FROM ..." />
+                <marker date="1418548493301" expanded="true" signature="1963:2234" placeholder="SELECT `post..." />
+                <marker date="1418548493301" expanded="true" signature="2686:2734" placeholder="SELECT 1 FRO..cat..." />
+                <marker date="1418548493301" expanded="true" signature="3138:3190" placeholder="SELECT id, n..cat..." />
+                <marker date="1418548493301" expanded="true" signature="3563:3596" placeholder="SELECT id FR..tags..." />
+                <marker date="1418548493301" expanded="true" signature="3563:3600" placeholder="SELECT id FR..tags..." />
+                <marker date="1418548493301" expanded="true" signature="3668:3700" placeholder="INSERT INTO ..." />
+                <marker date="1418548493301" expanded="true" signature="3668:3704" placeholder="INSERT INTO ..." />
+                <marker date="1418548493301" expanded="true" signature="3728:3768" placeholder="/* Execute t..." />
               </folding>
             </state>
           </provider>
@@ -275,19 +276,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/func/blog.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.233526" vertical-offset="2671" max-vertical-offset="3536">
-          <caret line="169" column="17" selection-start-line="169" selection-start-column="17" selection-end-line="169" selection-end-column="17" />
+        <state vertical-scroll-proportion="0.15491329" vertical-offset="2654" max-vertical-offset="3536">
+          <caret line="164" column="33" selection-start-line="164" selection-start-column="33" selection-end-line="164" selection-end-column="33" />
           <folding>
-            <marker date="1418547535550" expanded="true" signature="175:371" placeholder="INSERT INTO ..." />
-            <marker date="1418547535550" expanded="true" signature="1111:1208" placeholder="INSERT INTO ..." />
-            <marker date="1418547535550" expanded="true" signature="1600:1642" placeholder="DELETE FROM ..." />
-            <marker date="1418547535550" expanded="true" signature="1963:2234" placeholder="SELECT `post..." />
-            <marker date="1418547535550" expanded="true" signature="2686:2734" placeholder="SELECT 1 FRO..cat..." />
-            <marker date="1418547535550" expanded="true" signature="3138:3190" placeholder="SELECT id, n..cat..." />
-            <marker date="1418547535550" expanded="true" signature="3563:3596" placeholder="SELECT id FR..tags..." />
-            <marker date="1418547535550" expanded="true" signature="3563:3600" placeholder="SELECT id FR..tags..." />
-            <marker date="1418547535550" expanded="true" signature="3669:3709" placeholder="INSERT INTO ..." />
-            <marker date="1418547535550" expanded="true" signature="3733:3773" placeholder="/* Execute t..." />
+            <marker date="1418548493301" expanded="true" signature="175:371" placeholder="INSERT INTO ..." />
+            <marker date="1418548493301" expanded="true" signature="1111:1208" placeholder="INSERT INTO ..." />
+            <marker date="1418548493301" expanded="true" signature="1600:1642" placeholder="DELETE FROM ..." />
+            <marker date="1418548493301" expanded="true" signature="1963:2234" placeholder="SELECT `post..." />
+            <marker date="1418548493301" expanded="true" signature="2686:2734" placeholder="SELECT 1 FRO..cat..." />
+            <marker date="1418548493301" expanded="true" signature="3138:3190" placeholder="SELECT id, n..cat..." />
+            <marker date="1418548493301" expanded="true" signature="3563:3596" placeholder="SELECT id FR..tags..." />
+            <marker date="1418548493301" expanded="true" signature="3563:3600" placeholder="SELECT id FR..tags..." />
+            <marker date="1418548493301" expanded="true" signature="3668:3700" placeholder="INSERT INTO ..." />
+            <marker date="1418548493301" expanded="true" signature="3668:3704" placeholder="INSERT INTO ..." />
+            <marker date="1418548493301" expanded="true" signature="3728:3768" placeholder="/* Execute t..." />
           </folding>
         </state>
       </provider>
