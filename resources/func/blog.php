@@ -194,7 +194,7 @@ function add_tags($db, $name) {
     foreach ($name as $tag) {
         $result = mysql_query("SELECT id FROM tags WHERE name = $tag");
         if(mysql_num_rows($result) == 0) {
-            $query = "INSERT INTO 'tags'(name) VALUES $tag";
+            $query = "INSERT INTO `tags`(`name`) VALUES $tag";
   }
 	try    {
         /* Execute the query to create the tag*/
