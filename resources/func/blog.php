@@ -78,35 +78,67 @@ function delete($table, $id, $db)
     }
 }
 
-function get_posts($id = null, $cat_id = null)
+function get_posts($id = null, $cat_id = null, $db)
 {
-    $posts = array();
+//    $posts = array();
+//
+//    $query = "SELECT `posts`.`id` AS `post_id`,
+//                     `categories`.`id` AS `category_id`,
+//                `title`, `contents`, `date_posted`, `categories`.`name`
+//                FROM `posts`
+//                INNER JOIN `categories` ON `categories`.`id` = `posts`.`cat_id`";
+//
+//    if(isset($id)) {
+//        $id = (int)$id;
+//        $query .= "WHERE `posts`.`id` = '{$id}'";
+//    }
+//
+//    if(isset($cat_id)) {
+//        $cat_id = (int)$cat_id;
+//        $query .= "WHERE `cat_id` = '{$cat_id}'";
+//    }
+//
+//    $query .= "ORDER BY `posts`.`id` DESC";
+//
+//    $query = mysql_query($query);
+//
+//    while($row = mysql_fetch_assoc($query)){
+//        $posts[] = $row;
+//    }
+//
+//    return $posts;
 
-    $query = "SELECT `posts`.`id` AS `post_id`,
-                     `categories`.`id` AS `category_id`,
-                `title`, `contents`, `date_posted`, `categories`.`name`
-                FROM `posts`
-                INNER JOIN `categories` ON `categories`.`id` = `posts`.`cat_id`";
+    //============================
+
+    $query = "
+            SELECT
+                id, title, article, date, cat_id
+            FROM posts";
+
+    $query_params = array();
 
     if(isset($id)) {
         $id = (int)$id;
-        $query .= "WHERE `posts`.`id` = '{$id}'";
+        $query .= " WHERE id = :id";
+        $query_params[':id'] = $id;
     }
 
     if(isset($cat_id)) {
         $cat_id = (int)$cat_id;
-        $query .= "WHERE `cat_id` = '{$cat_id}'";
+        $query .= " WHERE cat_id = :cat_id";
+        $query_params[':cat_id'] = $cat_id;
     }
 
-    $query .= "ORDER BY `posts`.`id` DESC";
-
-    $query = mysql_query($query);
-
-    while($row = mysql_fetch_assoc($query)){
-        $posts[] = $row;
+    try {
+        $stmt = $db->prepare($query);
+        $stmt->execute($query_params);
+    } catch (PDOException $ex) {
+        // remove getMessage on production
+        die("Failed to run query: " . $ex->getMessage());
     }
 
-    return $posts;
+    $rows = $stmt->fetchAll();
+    return $rows;
 }
 
 function category_exist($name, $db)
