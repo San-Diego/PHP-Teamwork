@@ -15,7 +15,7 @@ function add_post($db,$title,$contents,$by,$cat,$time)
     {
         // Execute the query to create the user
         $stmt = $db->prepare($query);
-        $result = $stmt->execute($query_params);
+        $result = $stmt->execute();
     }catch(PDOException $ex)
     {
         die("Failed to run query: " . $ex->getMessage());
@@ -190,22 +190,22 @@ function get_categories($db)
     return $rows;
 }
 
-function add_tags($db, $name) {
-    foreach ($tags as $tag) {
-        $result = mysql_query("SELECT id FROM tags WHERE name = $tag");
-        if(mysql_num_rows($result) == 0) {
-            $query = INSERT INTO `tags` SET `name` = $tag;
-  }
-	try    {
-        /* Execute the query to create the tag*/
-        $stmt = $db->prepare($query);
-        $result = $stmt->execute($query_params);
-    }catch(PDOException $ex)    {
-        die("Failed to run query: " . $ex->getMessage());
-    }
-    }
-
-}
+//function add_tags($db, $name) {
+//    foreach ($tags as $tag) {
+//        $result = mysql_query("SELECT id FROM tags WHERE name = $tag");
+//        if(mysql_num_rows($result) == 0) {
+//            $query = INSERT INTO `tags` SET `name` = $tag;
+//  }
+//	try    {
+//        /* Execute the query to create the tag*/
+//        $stmt = $db->prepare($query);
+//        $result = $stmt->execute($query_params);
+//    }catch(PDOException $ex)    {
+//        die("Failed to run query: " . $ex->getMessage());
+//    }
+//    }
+//
+//}
 
 // this function is used only for presentation - created views/elements/category.php to replace it - still accepts $posts variable
 function display_content($posts)
