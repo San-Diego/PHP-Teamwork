@@ -255,29 +255,59 @@ function add_tags($db, $name) {
     }
 }
 
-// this function is used only for presentation - created views/elements/category.php to replace it - still accepts $posts variable
-function display_content($posts)
-{
-//    foreach ($posts as $post):
-//
-//        ?>
-<!--        <h2><a href="index.php?id=--><?//=$post['post_id']?><!--">--><?//=$post['title']?><!--</a></h2>-->
-<!--        <div>--><?//=nl2br($post['contents'])?><!--</div>-->
-<!--        <div>-->
-<!--            <p>Posted on --><?//=date('d-m-Y h:i:s', strtotime($post['date_posted']))?>
-<!--                in <a href="category.php?id=--><?//=$post['category_id']?><!--">--><?//=$post['name']?><!--</a>-->
-<!--            </p>-->
-<!--        </div>-->
-<!---->
-<!--        <menu>-->
-<!--            <ul>-->
-<!--                <li><a href="delete_post.php?id=--><?//=$post['post_id']?><!--">Delete This Post</a></li>-->
-<!--                <li><a href="edit_post.php?id=--><?//=$post['post_id']?><!--">Edit This Post</a></li>-->
-<!--            </ul>-->
-<!--        </menu>-->
-<!--    --><?php //endforeach; ?>
-<?php
+function add_comment($post_ID, $user_name, $content) {
+    global $db;
+
+    $query = "
+            INSERT INTO comments (
+                user_name, content, post_id
+            ) VALUES (
+                :user_name, :content, :post_ID
+            )
+        ";
+
+    $query_params = array(
+        ':user_name' => $user_name,
+        ':content' => $content,
+        ':post_ID' => $post_ID
+    );
+
+    try
+    {
+        // Execute the query to create the user
+        $stmt = $db->prepare($query);
+        $stmt->execute($query_params);
+    }
+    catch(PDOException $ex)
+    {
+        die("Failed to run query: " . $ex->getMessage());
+    }
 }
 
+function get_comments($post_id) {
+    global $db;
+
+    $query = "
+            SELECT
+                user_name, content
+            FROM comments
+            WHERE post_id = :post_id
+        ";
+
+    $query_params = array(
+        ':post_id' => $post_id
+    );
+
+    try {
+        $stmt = $db->prepare($query);
+        $stmt->execute($query_params);
+    } catch (PDOException $ex) {
+        // remove getMessage on production
+        die("Failed to run query: " . $ex->getMessage());
+    }
+
+    $rows = $stmt->fetchAll();
+    return $rows;
+}
 ?>
  

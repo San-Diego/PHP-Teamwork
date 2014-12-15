@@ -20,4 +20,20 @@
             <li><a href="edit_post.php?id=<?php echo $post['id']?>">Edit This Post</a></li>
         </ul>
     </menu>
+    <?php if($show_comments): ?>
+        <form method="post" action="add_comment.php">
+            <?php if(!isset($_SESSION['user'])): ?>
+                <label for="userName">Your name:</label>
+                <input type="text" name="user_name" id="userName"/><br />
+            <?php endif ?>
+            <label for="comment">Your comment:</label>
+            <input type="text" name="content" id="comment" />
+            <input type="submit" value="Add comment" />
+            <input type="hidden" name="post_id" value="<?php echo $post['id'] ?>"/>
+        </form>
+        <?php foreach($comments as $comment):?>
+            <p>User name: <?php echo htmlentities($comment['user_name']) ?></p>
+            <p>Content:<br /><?php echo htmlentities($comment['content']) ?></p>
+        <?php endforeach ?>
+    <?php endif ?>
 <?php endforeach; ?>
