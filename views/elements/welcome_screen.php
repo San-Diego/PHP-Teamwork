@@ -10,7 +10,8 @@
     <div><?php echo nl2br(htmlentities($post['article'])) ?></div>
     <div>
         <p>
-            Posted on <?php echo date('d-m-Y h:i:s', strtotime($post['date']))?>
+            Posted on <?php echo date('d-m-Y h:i:s', strtotime($post['date']))?><br />
+            visits: <?php echo $post['visits'] ?>
         </p>
     </div>
 

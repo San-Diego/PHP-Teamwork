@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 15, 2014 at 08:45 PM
+-- Generation Time: Dec 15, 2014 at 10:51 PM
 -- Server version: 5.5.40-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.5
 
@@ -65,7 +65,7 @@ CREATE TABLE IF NOT EXISTS `comments` (
   `content` text CHARACTER SET utf8 NOT NULL,
   `post_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
 
 --
 -- Dumping data for table `comments`
@@ -80,9 +80,8 @@ INSERT INTO `comments` (`id`, `user_name`, `content`, `post_id`) VALUES
 (6, 'gosho', 'gosho is the best', 7),
 (7, 'test', 'new comment', 7),
 (8, 'test', 'i am comment from logged user', 34),
-(9, 'Pesho ', 'i am comment from guest user', 34),
-(10, 'sasho  - guest', 'not logged', 34),
-(11, 'test', 'testing', 34);
+(12, 'test', 'logged comment', 35),
+(13, 'Pesho  - guest', 'comment', 35);
 
 -- --------------------------------------------------------
 
@@ -97,15 +96,17 @@ CREATE TABLE IF NOT EXISTS `posts` (
   `author` int(11) NOT NULL,
   `cat_id` int(11) NOT NULL,
   `date` int(11) NOT NULL,
+  `visits` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=35 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=36 ;
 
 --
 -- Dumping data for table `posts`
 --
 
-INSERT INTO `posts` (`id`, `title`, `article`, `author`, `cat_id`, `date`) VALUES
-(34, 'Test', 'content test', 8, 4, 1418668998);
+INSERT INTO `posts` (`id`, `title`, `article`, `author`, `cat_id`, `date`, `visits`) VALUES
+(34, 'Test', 'content test', 8, 4, 1418668998, 17),
+(35, 'post2', 'ajiwdjwaiawjdiawjdi\r\nawjjwadoaowdj\r\ndadkoawdwak\r\nwodkwoawd', 8, 4, 1418669526, 2);
 
 -- --------------------------------------------------------
 
@@ -175,7 +176,8 @@ INSERT INTO `tags` (`id`, `name`) VALUES
 (0, 'adwaw'),
 (0, 'adw'),
 (0, 't'),
-(0, 't');
+(0, 't'),
+(0, 'aa');
 
 -- --------------------------------------------------------
 

@@ -155,7 +155,7 @@ function get_posts($id = null, $cat_id = null, $db)
 
     $query = "
             SELECT
-                id, title, article, date, cat_id
+                id, title, article, date, cat_id, visits
             FROM posts";
 
     $query_params = array();
@@ -182,6 +182,26 @@ function get_posts($id = null, $cat_id = null, $db)
 
     $rows = $stmt->fetchAll();
     return $rows;
+}
+
+function increase_visits($id) {
+    global $db;
+
+    $query = "UPDATE posts SET visits=visits+1 WHERE id=:id";
+
+    $query_params = array(
+        ':id' => $id
+    );
+
+    try
+    {
+        $stmt = $db->prepare($query);
+        $stmt->execute($query_params);
+    }
+    catch(PDOException $ex)
+    {
+        die("Failed to run query: " . $ex->getMessage());
+    }
 }
 
 function category_exist($name, $db)
