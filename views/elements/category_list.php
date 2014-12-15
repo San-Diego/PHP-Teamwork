@@ -1,8 +1,6 @@
 <h1>Category List</h1>
 <?php
 
-$categories = get_categories($db);
-
 foreach ($categories as $category):
     ?>
     <p>

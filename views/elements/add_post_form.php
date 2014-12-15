@@ -15,7 +15,7 @@
             $categories = get_categories($db);
             foreach ($categories as $category):
                 ?>
-                <option value="<?php echo htmlentities($category['id']) ?>"><?php echo htmlentities($category['name']) ?></option>
+                <option value="<?php echo htmlentities($category['name']) ?>"><?php echo htmlentities($category['name']) ?></option>
             <?php endforeach; ?>
         </select>
     </div>

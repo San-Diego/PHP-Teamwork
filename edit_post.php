@@ -1,7 +1,8 @@
 <?php
 require_once('resources/init.php');
 
-$post = get_posts($_GET['id']);
+$post = get_posts($_GET['id'], null, $db);
+$post_id = $_GET['id'];
 
 if(isset($_POST['title'], $_POST['contents'], $_POST['category'])) {
 
@@ -23,15 +24,14 @@ if(isset($_POST['title'], $_POST['contents'], $_POST['category'])) {
         $errors[] = 'You need to supply some text';
     }
 
-    if (!category_exist('id', $_POST['category'])) {
+    if (!category_exist($_POST['category'], $db)) {
         $errors[] = 'That category does not exist';
     }
 
     if (empty($errors)) {
-        edit_post($_GET['id'], $title, $contents, $_POST['category'])
-        or die(mysql_error());
+        edit_post($post_id, $title, $contents, $_POST['category']);
 
-        header("Location: index.php?id={$post[0]['post_id']}");
+        header("Location: index.php?id={$post_id}");
         die();
     }
 }

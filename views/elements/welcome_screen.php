@@ -16,8 +16,8 @@
 
     <menu>
         <ul>
-            <li><a href="delete_post.php?id=<?=$post['id']?>">Delete This Post</a></li>
-            <li><a href="edit_post.php?id=<?=$post['id']?>">Edit This Post</a></li>
+            <li><a href="delete_post.php?id=<?php echo $post['id']?>">Delete This Post</a></li>
+            <li><a href="edit_post.php?id=<?php echo $post['id']?>">Edit This Post</a></li>
         </ul>
     </menu>
 <?php endforeach; ?>

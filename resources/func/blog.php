@@ -22,18 +22,32 @@ function add_post($db,$title,$contents,$by,$cat,$time)
     }
 }
 
-function edit_post($title, $contents, $category)
+function edit_post($id, $title, $contents, $category)
 {
-    $id = (int)$_GET['id'];
-    $title = mysql_real_escape_string($title);
-    $contents = mysql_real_escape_string($contents);
-    $category = (int)$category;
+    global $db;
 
-    mysql_query("UPDATE `posts` SET
-                  `cat_id` = {$category},
-                  `title` = '{$title}',
-                  `contents` = '{$contents}',
-                  WHERE `id` = {$id}");
+    $query = "UPDATE posts SET
+                  cat_id = :category,
+                  title = :title,
+                  article = :contents
+                  WHERE id = :id";
+
+    $query_params = array(
+        ':category' => $category,
+        ':title' => $title,
+        ':contents' => $contents,
+        ':id' => $id
+    );
+
+    try
+    {
+        // Execute the query to create the user
+        $stmt = $db->prepare($query);
+        $result = $stmt->execute($query_params);
+    }catch(PDOException $ex)
+    {
+        die("Failed to run query: " . $ex->getMessage());
+    }
 }
 
 function add_category($name, $db)
@@ -148,11 +162,11 @@ function category_exist($name, $db)
 	 1
 	 FROM cat
 	 WHERE
-	 name = :username
+	 name = :name
 	 ";
 
 	 $query_params = array(
-	 ':username' => $name
+	 ':name' => strtolower($name)
 	 );
 
 	 try {
