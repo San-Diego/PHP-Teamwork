@@ -34,6 +34,7 @@
         <?php foreach($comments as $comment):?>
             <p>User name: <?php echo htmlentities($comment['user_name']) ?></p>
             <p>Content:<br /><?php echo htmlentities($comment['content']) ?></p>
+            <a href="delete_comment.php?id=<?php echo $comment['id'] ?>&post_ID=<?php echo $post['id'] ?>">Delete comment</a>
         <?php endforeach ?>
     <?php endif ?>
 <?php endforeach; ?>

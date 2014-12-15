@@ -286,7 +286,7 @@ function get_comments($post_id) {
 
     $query = "
             SELECT
-                user_name, content
+                id, user_name, content
             FROM comments
             WHERE post_id = :post_id
         ";
