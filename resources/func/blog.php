@@ -76,6 +76,38 @@ function add_category($name, $db)
     }
 }
 
+function get_category_id($name) {
+    global $db;
+
+    $query = "
+            SELECT
+                id
+            FROM cat
+            WHERE name = :name";
+
+    $query_params = array(
+        ':name' => $name
+    );
+
+    if(isset($id)) {
+        $id = (int)$id;
+        $query .= " WHERE id = :id";
+        $query_params[':id'] = $id;
+    }
+
+    try {
+        $stmt = $db->prepare($query);
+        $stmt->execute($query_params);
+    } catch (PDOException $ex) {
+        // remove getMessage on production
+        die("Failed to run query: " . $ex->getMessage());
+    }
+
+    $row = $stmt->fetch();
+    return $row['id'];
+
+}
+
 function delete($table, $id, $db)
 {
     $query = "
