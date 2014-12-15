@@ -18,7 +18,7 @@ if(!empty($errors)) {
 }
 
 $content = $_POST["content"];
-$user_name = isset($_SESSION["user"]) ? $_SESSION["user"]["username"] : $_POST["user_name"];
+$user_name = isset($_SESSION["user"]) ? $_SESSION["user"]["username"] : $_POST["user_name"] . " - guest";
 
 add_comment($post_ID, $user_name, $content);
 header("Location: index.php?id={$post_ID}");

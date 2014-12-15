@@ -33,9 +33,8 @@ if(isset($_POST['title'], $_POST['contents'], $_POST['category'], $_POST['tags']
 
     if (empty($errors)) {
         add_tags($db,$tags);
-        var_dump($_POST['category']);
         add_post($db,$title,$contents,$_SESSION['user']['id'],get_category_id($_POST['category']),time());
-        $id = mysql_insert_id();
+        $id = $db->lastInsertId();
         header("Location: index.php?id={$id}");
         die();
     }

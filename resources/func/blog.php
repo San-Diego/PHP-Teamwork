@@ -2,20 +2,17 @@
 
 function add_post($db,$title,$contents,$by,$cat,$time)
 {
-    $title = mysql_real_escape_string($title);
-    $contents = mysql_real_escape_string($contents);
-	$query = "INSERT INTO `posts` SET
-                    `title` = '{$title}',
-                    `article` = '{$contents}',
-					`by` = '{$by}',
-					cat_id = '{$cat}',
-                    `date` = '{$time}' ";
-					
-	try
+   $query = "INSERT INTO posts (title,article,author,cat_id,date) VALUES (:title,:contents,:author,:cat,:time)";
+
+    try
     {
-        // Execute the query to create the user
         $stmt = $db->prepare($query);
-        $result = $stmt->execute();
+        $stmt->bindParam(':title', $title);
+        $stmt->bindParam(':contents', $contents);
+        $stmt->bindParam(':author', $by);
+        $stmt->bindParam(':cat', $cat);
+        $stmt->bindParam(':time', $time);
+        $stmt->execute();
     }catch(PDOException $ex)
     {
         die("Failed to run query: " . $ex->getMessage());
