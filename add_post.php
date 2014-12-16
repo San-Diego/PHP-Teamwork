@@ -35,6 +35,7 @@ if(isset($_POST['title'], $_POST['contents'], $_POST['category'], $_POST['tags']
         add_tags($db,$tags);
         add_post($db,$title,$contents,$_SESSION['user']['id'],$_POST['category'],time());
         $id = mysql_insert_id();
+        add_tagsToPost($db,$tagId, $postId);
         header("Location: index.php?id={$id}");
         die();
     }
