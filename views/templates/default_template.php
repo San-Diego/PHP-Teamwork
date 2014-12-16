@@ -28,6 +28,9 @@
   </head>
 <body>
     <?php include_once DX_ROOT_DIR . 'views/elements/header.php'; ?>
+	 <div class="row">
+
+        <div class="col-sm-8 blog-main">
     <?php include_once DX_ROOT_DIR . $element ?>
     <?php include_once DX_ROOT_DIR . 'views/elements/footer.php'; ?>
 </body>
