@@ -14,13 +14,14 @@
             visits: <?php echo $post['visits'] ?>
         </p>
     </div>
-
+    <?php if(isset($_SESSION['user']) && $_SESSION['user']['admin'] == 1): ?>
     <menu>
         <ul>
             <li><a href="delete_post.php?id=<?php echo $post['id']?>">Delete This Post</a></li>
             <li><a href="edit_post.php?id=<?php echo $post['id']?>">Edit This Post</a></li>
         </ul>
     </menu>
+    <?php endif ?>
     <?php if($show_comments): ?>
         <form method="post" action="add_comment.php">
             <?php if(!isset($_SESSION['user'])): ?>
@@ -35,7 +36,9 @@
         <?php foreach($comments as $comment):?>
             <p>User name: <?php echo htmlentities($comment['user_name']) ?></p>
             <p>Content:<br /><?php echo htmlentities($comment['content']) ?></p>
+            <?php if(isset($_SESSION['user']) && $_SESSION['user']['admin'] == 1): ?>
             <a href="delete_comment.php?id=<?php echo $comment['id'] ?>&post_ID=<?php echo $post['id'] ?>">Delete comment</a>
+            <?php endif ?>
         <?php endforeach ?>
     <?php endif ?>
 <?php endforeach;

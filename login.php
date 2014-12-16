@@ -18,7 +18,8 @@ if(!empty($_POST)) {
                 id,
                 username,
                 password,
-                email
+                email,
+                admin
             FROM users
             WHERE
                 username = :username
