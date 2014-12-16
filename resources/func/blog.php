@@ -121,7 +121,7 @@ function delete($table, $id, $db)
     }
 }
 
-function get_posts($id = null, $cat_id = null, $db)
+function get_posts($id = null, $cat_id = null, $offset, $count, $db)
 {
 //    $posts = array();
 //
@@ -171,6 +171,8 @@ function get_posts($id = null, $cat_id = null, $db)
         $query .= " WHERE cat_id = :cat_id";
         $query_params[':cat_id'] = $cat_id;
     }
+
+    $query .= " LIMIT {$offset}, {$count}";
 
     try {
         $stmt = $db->prepare($query);
@@ -325,6 +327,27 @@ function get_comments($post_id) {
 
     $rows = $stmt->fetchAll();
     return $rows;
+}
+
+function get_number_of_rows($tab, $col) {
+    global $db;
+
+    $query = "SELECT COUNT(:col) FROM $tab";
+
+    $query_params = array(
+        ':col' => $col,
+        //':tab' => $tab
+    );
+
+    try {
+        $stmt = $db->prepare($query);
+        $stmt->execute($query_params);
+    } catch (PDOException $ex) {
+        // remove getMessage on production
+        die("Failed to run query: " . $ex->getMessage());
+    }
+
+    return $stmt->fetch()["COUNT('$col')"];
 }
 ?>
  

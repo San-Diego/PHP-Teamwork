@@ -38,4 +38,11 @@
             <a href="delete_comment.php?id=<?php echo $comment['id'] ?>&post_ID=<?php echo $post['id'] ?>">Delete comment</a>
         <?php endforeach ?>
     <?php endif ?>
-<?php endforeach; ?>
+<?php endforeach;
+if (!$show_comments) :?>
+<ul>
+    <?php for($i = 1 ; $i <= $num_pages ; $i++): ?>
+        <li><a href="index.php?page=<?php echo $i ?>"><?php echo $i ?></a></li>
+    <?php endfor ?>
+</ul>
+<?php endif ?>
