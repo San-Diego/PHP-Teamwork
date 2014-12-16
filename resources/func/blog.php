@@ -257,31 +257,77 @@ function get_categories($db)
 
 function add_tags($db, $name) {
     foreach ($name as $tag) {
-        $result = mysql_query("SELECT `name` FROM `tags` WHERE `name` = $tag");
-        if($result == 0) {
-            $query = "INSERT INTO `tags` SET
-                    `name` = '{$tag}'";
+        $query = "SELECT id FROM tags WHERE name = :tag";
+        $query_params = array(
+            ':tag' => $tag
+        );
+        try    {
+            /* Execute the query to create the tag*/
+            $stmt = $db->prepare($query);
+            $stmt->execute($query_params);
+            $result = $stmt->fetch();
+            $tag_id = $result['id'];
+        }catch(PDOException $ex)    {
+            die("Failed to run query: " . $ex->getMessage());
+        }
 
-  }
-	try    {
-        /* Execute the query to create the tag*/
-        $stmt = $db->prepare($query);
-        $result = $stmt->execute();
-    }catch(PDOException $ex)    {
-        die("Failed to run query: " . $ex->getMessage());
-    }
+        if(empty($result)) {
+            $query = "INSERT INTO tags SET
+                    name = :tag, count = 1";
+
+            $query_params = array(
+                ':tag' => $tag
+            );
+
+            try {
+                /* Execute the query to create the tag*/
+                $stmt = $db->prepare($query);
+                $stmt->execute($query_params);
+            } catch (PDOException $ex) {
+                die("Failed to run query: " . $ex->getMessage());
+            }
+        } else {
+            $query = "UPDATE tags SET count=count+1 WHERE id=:tag_id";
+
+            $query_params = array(
+                ':tag_id' => $tag_id
+            );
+
+            try {
+                /* Execute the query to create the tag*/
+                $stmt = $db->prepare($query);
+                $stmt->execute($query_params);
+            } catch (PDOException $ex) {
+                die("Failed to run query: " . $ex->getMessage());
+            }
+
+        }
     }
 }
 
 function add_tagsToPost($db,$name, $id) {
     foreach ($name as $tag) {
-        $result = mysql_query("SELECT `id` FROM `tags` WHERE `name` = $tag");
-            $query = "INSERT INTO `blog_post_tags` SET
-                    `tag_id` = `{$tag}`, `blog_post_id` = `{$id}`";
+        $query = "SELECT id FROM tags WHERE name = :tag";
+
+        $query_params = array(
+            ':tag' => $tag
+        );
         try    {
             /* Execute the query to create the tag*/
             $stmt = $db->prepare($query);
-            $result = $stmt->execute();
+            $stmt->execute($query_params);
+        }catch(PDOException $ex)    {
+            die("Failed to run query: " . $ex->getMessage());
+        }
+
+        $tag_id = $stmt->fetch()['id'];
+
+            $query = "INSERT INTO blog_post_tags SET
+                    tag_id = {$tag_id}, blog_post_id = {$id}";
+        try    {
+            /* Execute the query to create the tag*/
+            $stmt = $db->prepare($query);
+            $stmt->execute();
         }catch(PDOException $ex)    {
             die("Failed to run query: " . $ex->getMessage());
         }
