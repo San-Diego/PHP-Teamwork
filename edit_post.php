@@ -1,7 +1,7 @@
 <?php
 require_once('resources/init.php');
 
-$post = get_posts($_GET['id'], null, $db);
+$post = get_posts($_GET['id'], null, 0, 1, $db);
 $post_id = $_GET['id'];
 
 if(isset($_POST['title'], $_POST['contents'], $_POST['category'])) {
@@ -29,7 +29,7 @@ if(isset($_POST['title'], $_POST['contents'], $_POST['category'])) {
     }
 
     if (empty($errors)) {
-        edit_post($post_id, $title, $contents, $_POST['category']);
+        edit_post($post_id, $title, $contents, get_category_id($_POST['category']));
 
         header("Location: index.php?id={$post_id}");
         die();
