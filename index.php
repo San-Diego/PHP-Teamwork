@@ -9,6 +9,7 @@ $offset = $num_posts - $page * $count_of_posts;
 $offset = $offset < 0 || isset($_GET['id']) ? 0 : $offset;
 
 $num_pages = floor($num_posts / $count_of_posts);
+$num_pages = $num_posts % $count_of_posts != 0 ? $num_pages += 1 : $num_pages;
 $first_page = $page == 1 ? 1 : $page - 1;
 $last_page = $first_page + 2 > $num_pages ? $num_pages : $first_page + 2;
 $prev_page = $page - 1 < 1 ? 1 : $page - 1;
