@@ -53,10 +53,14 @@
 <?php endforeach;
 if (!$show_comments) :?>
 <nav>
-	<ul class="pager">
-		<?php for($i = 1 ; $i <= $num_pages ; $i++): ?>
+	<ul class="pagination">
+        <li><a href="index.php?page=1">&lt;&lt;</a></li>
+        <li><a href="index.php?page=<?php echo $prev_page ?>">&lt;</a></li>
+		<?php for($i = $first_page ; $i <= $last_page ; $i++): ?>
 			<li><a href="index.php?page=<?php echo $i ?>"><?php echo $i ?></a></li>
 		<?php endfor ?>
+        <li><a href="index.php?page=<?php echo $next_page ?>">&gt;</a></li>
+        <li><a href="index.php?page=<?php echo $num_pages ?>">&gt;&gt;</a></li>
 	</ul>
 </nav>
       </div><!-- /.row -->

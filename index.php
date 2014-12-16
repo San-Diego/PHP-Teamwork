@@ -2,12 +2,19 @@
 require_once('resources/init.php');
 
 $page = isset($_GET['page']) ? $_GET['page'] : 1;
+
 $count_of_posts = 3;
 $num_posts = get_number_of_rows('posts', 'id');
 $offset = $num_posts - $page * $count_of_posts;
 $offset = $offset < 0 || isset($_GET['id']) ? 0 : $offset;
 
 $num_pages = floor($num_posts / $count_of_posts);
+$first_page = $page == 1 ? 1 : $page - 1;
+$last_page = $first_page + 2 > $num_pages ? $num_pages : $first_page + 2;
+$prev_page = $page - 1 < 1 ? 1 : $page - 1;
+$next_page = $page + 1 > $num_pages ? $num_pages : $page + 1;
+
+
 if($num_posts % $count_of_posts != 0) {
     $num_pages++;
 }
