@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 15, 2014 at 10:51 PM
+-- Generation Time: Dec 16, 2014 at 02:46 PM
 -- Server version: 5.5.40-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.5
 
@@ -19,7 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `blog_project`
 --
-
+CREATE DATABASE IF NOT EXISTS `blog_project`;
+USE `blog_project`;
 -- --------------------------------------------------------
 
 --
@@ -30,6 +31,20 @@ CREATE TABLE IF NOT EXISTS `blog_post_tags` (
   `blog_post_id` int(11) NOT NULL,
   `tag_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `blog_post_tags`
+--
+
+INSERT INTO `blog_post_tags` (`blog_post_id`, `tag_id`) VALUES
+(88, 1),
+(88, 2),
+(88, 3),
+(89, 1),
+(89, 2),
+(90, 4),
+(90, 5),
+(91, 4);
 
 -- --------------------------------------------------------
 
@@ -65,7 +80,7 @@ CREATE TABLE IF NOT EXISTS `comments` (
   `content` text CHARACTER SET utf8 NOT NULL,
   `post_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
 
 --
 -- Dumping data for table `comments`
@@ -81,7 +96,9 @@ INSERT INTO `comments` (`id`, `user_name`, `content`, `post_id`) VALUES
 (7, 'test', 'new comment', 7),
 (8, 'test', 'i am comment from logged user', 34),
 (12, 'test', 'logged comment', 35),
-(13, 'Pesho  - guest', 'comment', 35);
+(13, 'Pesho  - guest', 'comment', 35),
+(15, 'test', 'ajwiwad', 34),
+(16, 'test', 'iawdjwad', 65);
 
 -- --------------------------------------------------------
 
@@ -98,15 +115,17 @@ CREATE TABLE IF NOT EXISTS `posts` (
   `date` int(11) NOT NULL,
   `visits` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=36 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=92 ;
 
 --
 -- Dumping data for table `posts`
 --
 
 INSERT INTO `posts` (`id`, `title`, `article`, `author`, `cat_id`, `date`, `visits`) VALUES
-(34, 'Test', 'content test', 8, 4, 1418668998, 17),
-(35, 'post2', 'ajiwdjwaiawjdiawjdi\r\nawjjwadoaowdj\r\ndadkoawdwak\r\nwodkwoawd', 8, 4, 1418669526, 2);
+(88, 'okdwao', 'kdoakodw', 8, 4, 1418733050, 2),
+(89, 'doadwjk', 'jdoawdj', 8, 4, 1418733072, 1),
+(90, 'koko', 'kokoko', 8, 4, 1418733252, 1),
+(91, 'dawiajdwi', 'ijdaiwjdwia', 8, 4, 1418733761, 1);
 
 -- --------------------------------------------------------
 
@@ -115,69 +134,22 @@ INSERT INTO `posts` (`id`, `title`, `article`, `author`, `cat_id`, `date`, `visi
 --
 
 CREATE TABLE IF NOT EXISTS `tags` (
-  `id` int(11) NOT NULL,
-  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `count` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `tags`
 --
 
-INSERT INTO `tags` (`id`, `name`) VALUES
-(0, 'a'),
-(0, 'b,c'),
-(0, 'a'),
-(0, 'b'),
-(0, 'a'),
-(0, 'a'),
-(0, 'a'),
-(0, 'a'),
-(0, 'a'),
-(0, 'a'),
-(0, 'jaidw'),
-(0, 'a'),
-(0, 'a'),
-(0, 'a'),
-(0, 'a'),
-(0, 'jiadw'),
-(0, 'ajowd'),
-(0, 'ajowd'),
-(0, 'ajowd'),
-(0, 'ajowd'),
-(0, 'a'),
-(0, 'a'),
-(0, 'a'),
-(0, 'a'),
-(0, 'a'),
-(0, 'a'),
-(0, 'a'),
-(0, 'a'),
-(0, 'a'),
-(0, 'gggg'),
-(0, 'gggg'),
-(0, 'ccc'),
-(0, 'tag'),
-(0, 'test'),
-(0, 'e'),
-(0, 'p'),
-(0, 'g'),
-(0, 'g'),
-(0, 't'),
-(0, 'a'),
-(0, 'a'),
-(0, 'a'),
-(0, 'a'),
-(0, 'a'),
-(0, ''),
-(0, 'a'),
-(0, 'aa'),
-(0, 'j'),
-(0, 'j'),
-(0, 'adwaw'),
-(0, 'adw'),
-(0, 't'),
-(0, 't'),
-(0, 'aa');
+INSERT INTO `tags` (`id`, `name`, `count`) VALUES
+(1, 'a ', 0),
+(2, 'b', 0),
+(3, 'c', 0),
+(4, 'asdfm', 2),
+(5, 'ldkawowd', 1);
 
 -- --------------------------------------------------------
 

@@ -257,6 +257,7 @@ function get_categories($db)
 
 function add_tags($db, $name) {
     foreach ($name as $tag) {
+
         $query = "SELECT id FROM tags WHERE name = :tag";
         $query_params = array(
             ':tag' => $tag
