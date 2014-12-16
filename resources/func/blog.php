@@ -2,38 +2,49 @@
 
 function add_post($db,$title,$contents,$by,$cat,$time)
 {
-    $title = mysql_real_escape_string($title);
-    $contents = mysql_real_escape_string($contents);
-	$query = "INSERT INTO `posts` SET
-                    `title` = '{$title}',
-                    `article` = '{$contents}',
-					`by` = '{$by}',
-					cat_id = '{$cat}',
-                    `date` = '{$time}' ";
-					
-	try
+   $query = "INSERT INTO posts (title,article,author,cat_id,date) VALUES (:title,:contents,:author,:cat,:time)";
+
+    try
     {
-        // Execute the query to create the user
         $stmt = $db->prepare($query);
-        $result = $stmt->execute();
+        $stmt->bindParam(':title', $title);
+        $stmt->bindParam(':contents', $contents);
+        $stmt->bindParam(':author', $by);
+        $stmt->bindParam(':cat', $cat);
+        $stmt->bindParam(':time', $time);
+        $stmt->execute();
     }catch(PDOException $ex)
     {
         die("Failed to run query: " . $ex->getMessage());
     }
 }
 
-function edit_post($title, $contents, $category)
+function edit_post($id, $title, $contents, $category)
 {
-    $id = (int)$_GET['id'];
-    $title = mysql_real_escape_string($title);
-    $contents = mysql_real_escape_string($contents);
-    $category = (int)$category;
+    global $db;
 
-    mysql_query("UPDATE `posts` SET
-                  `cat_id` = {$category},
-                  `title` = '{$title}',
-                  `contents` = '{$contents}',
-                  WHERE `id` = {$id}");
+    $query = "UPDATE posts SET
+                  cat_id = :category,
+                  title = :title,
+                  article = :contents
+                  WHERE id = :id";
+
+    $query_params = array(
+        ':category' => $category,
+        ':title' => $title,
+        ':contents' => $contents,
+        ':id' => $id
+    );
+
+    try
+    {
+        // Execute the query to create the user
+        $stmt = $db->prepare($query);
+        $result = $stmt->execute($query_params);
+    }catch(PDOException $ex)
+    {
+        die("Failed to run query: " . $ex->getMessage());
+    }
 }
 
 function add_category($name, $db)
@@ -62,6 +73,38 @@ function add_category($name, $db)
     }
 }
 
+function get_category_id($name) {
+    global $db;
+
+    $query = "
+            SELECT
+                id
+            FROM cat
+            WHERE name = :name";
+
+    $query_params = array(
+        ':name' => $name
+    );
+
+    if(isset($id)) {
+        $id = (int)$id;
+        $query .= " WHERE id = :id";
+        $query_params[':id'] = $id;
+    }
+
+    try {
+        $stmt = $db->prepare($query);
+        $stmt->execute($query_params);
+    } catch (PDOException $ex) {
+        // remove getMessage on production
+        die("Failed to run query: " . $ex->getMessage());
+    }
+
+    $row = $stmt->fetch();
+    return $row['id'];
+
+}
+
 function delete($table, $id, $db)
 {
     $query = "
@@ -78,7 +121,7 @@ function delete($table, $id, $db)
     }
 }
 
-function get_posts($id = null, $cat_id = null, $db)
+function get_posts($id = null, $cat_id = null, $offset, $count, $db)
 {
 //    $posts = array();
 //
@@ -112,7 +155,7 @@ function get_posts($id = null, $cat_id = null, $db)
 
     $query = "
             SELECT
-                id, title, article, date, cat_id
+                id, title, article, date, cat_id, visits
             FROM posts";
 
     $query_params = array();
@@ -129,6 +172,8 @@ function get_posts($id = null, $cat_id = null, $db)
         $query_params[':cat_id'] = $cat_id;
     }
 
+    $query .= " LIMIT {$offset}, {$count}";
+
     try {
         $stmt = $db->prepare($query);
         $stmt->execute($query_params);
@@ -141,6 +186,26 @@ function get_posts($id = null, $cat_id = null, $db)
     return $rows;
 }
 
+function increase_visits($id) {
+    global $db;
+
+    $query = "UPDATE posts SET visits=visits+1 WHERE id=:id";
+
+    $query_params = array(
+        ':id' => $id
+    );
+
+    try
+    {
+        $stmt = $db->prepare($query);
+        $stmt->execute($query_params);
+    }
+    catch(PDOException $ex)
+    {
+        die("Failed to run query: " . $ex->getMessage());
+    }
+}
+
 function category_exist($name, $db)
 {
 	 $query = "
@@ -148,11 +213,11 @@ function category_exist($name, $db)
 	 1
 	 FROM cat
 	 WHERE
-	 name = :username
+	 name = :name
 	 ";
 
 	 $query_params = array(
-	 ':username' => $name
+	 ':name' => strtolower($name)
 	 );
 
 	 try {
@@ -208,49 +273,80 @@ function add_tags($db, $name) {
     }
 }
 
-function add_tagsToPost($db,$name) {
-    foreach ($name as $tag) {
-        $result = mysql_query("SELECT `name` FROM `tags` WHERE `name` = $tag");
-        if($result == 0) {
-            $query = "INSERT INTO `tags` SET
-                    `name` = '{$tag}'";
+function add_comment($post_ID, $user_name, $content) {
+    global $db;
 
-        }
-        try    {
-            /* Execute the query to create the tag*/
-            $stmt = $db->prepare($query);
-            $result = $stmt->execute();
-        }catch(PDOException $ex)    {
-            die("Failed to run query: " . $ex->getMessage());
-        }
+    $query = "
+            INSERT INTO comments (
+                user_name, content, post_id
+            ) VALUES (
+                :user_name, :content, :post_ID
+            )
+        ";
+
+    $query_params = array(
+        ':user_name' => $user_name,
+        ':content' => $content,
+        ':post_ID' => $post_ID
+    );
+
+    try
+    {
+        // Execute the query to create the user
+        $stmt = $db->prepare($query);
+        $stmt->execute($query_params);
+    }
+    catch(PDOException $ex)
+    {
+        die("Failed to run query: " . $ex->getMessage());
     }
 }
+
+function get_comments($post_id) {
+    global $db;
+
+    $query = "
+            SELECT
+                id, user_name, content
+            FROM comments
+            WHERE post_id = :post_id
+        ";
+
+    $query_params = array(
+        ':post_id' => $post_id
+    );
+
+    try {
+        $stmt = $db->prepare($query);
+        $stmt->execute($query_params);
+    } catch (PDOException $ex) {
+        // remove getMessage on production
+        die("Failed to run query: " . $ex->getMessage());
+    }
+
+    $rows = $stmt->fetchAll();
+    return $rows;
 }
 
+function get_number_of_rows($tab, $col) {
+    global $db;
 
-// this function is used only for presentation - created views/elements/category.php to replace it - still accepts $posts variable
-function display_content($posts)
-{
-//    foreach ($posts as $post):
-//
-//        ?>
-<!--        <h2><a href="index.php?id=--><?//=$post['post_id']?><!--">--><?//=$post['title']?><!--</a></h2>-->
-<!--        <div>--><?//=nl2br($post['contents'])?><!--</div>-->
-<!--        <div>-->
-<!--            <p>Posted on --><?//=date('d-m-Y h:i:s', strtotime($post['date_posted']))?>
-<!--                in <a href="category.php?id=--><?//=$post['category_id']?><!--">--><?//=$post['name']?><!--</a>-->
-<!--            </p>-->
-<!--        </div>-->
-<!---->
-<!--        <menu>-->
-<!--            <ul>-->
-<!--                <li><a href="delete_post.php?id=--><?//=$post['post_id']?><!--">Delete This Post</a></li>-->
-<!--                <li><a href="edit_post.php?id=--><?//=$post['post_id']?><!--">Edit This Post</a></li>-->
-<!--            </ul>-->
-<!--        </menu>-->
-<!--    --><?php //endforeach; ?>
-<?php
+    $query = "SELECT COUNT(:col) FROM $tab";
+
+    $query_params = array(
+        ':col' => $col,
+        //':tab' => $tab
+    );
+
+    try {
+        $stmt = $db->prepare($query);
+        $stmt->execute($query_params);
+    } catch (PDOException $ex) {
+        // remove getMessage on production
+        die("Failed to run query: " . $ex->getMessage());
+    }
+
+    return $stmt->fetch()["COUNT('$col')"];
 }
-
 ?>
  

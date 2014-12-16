@@ -7,7 +7,7 @@ if(!isset($_GET['id'])) {
     die();
 }
 
-delete('posts', $_GET['id']);
+delete('posts', $_GET['id'], $db);
 
 header('Location: index.php');
 die();

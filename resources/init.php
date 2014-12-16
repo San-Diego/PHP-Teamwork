@@ -14,7 +14,6 @@ $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
 session_start();
 
-
 include_once('func/blog.php');
 
 define( 'DX_ROOT_DIR', substr(dirname( __FILE__ ), 0, strlen(dirname( __FILE__ )) - strlen('resources')) );

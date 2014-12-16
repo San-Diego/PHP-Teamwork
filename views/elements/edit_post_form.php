@@ -6,16 +6,17 @@
     </div>
     <div>
         <label for="contents">Contents: </label>
-        <textarea name="contents" id="contents" cols="50" rows="15"><?=$post[0]['contents']?></textarea>
+        <textarea name="contents" id="contents" cols="50" rows="15"><?=$post[0]['article']?></textarea>
     </div>
     <div>
         <label for="category">Category: </label>
         <select name="category" id="category">
             <?php
-            foreach (get_categories() as $category):
+            $categories = get_categories($db);
+            foreach ($categories as $category):
                 $selected = ($category['name'] == $post[0]['name']) ? 'selected' : '';
                 ?>
-                <option value="<?=$category['id']?>"<?=$selected?>><?=$category['name']?></option>
+                <option value="<?php echo $category['name']?>"<?php echo $selected?>><?php echo $category['name']?></option>
             <?php endforeach; ?>
         </select>
     </div>
