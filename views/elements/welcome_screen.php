@@ -57,4 +57,9 @@ if (!$show_comments) :?>
         <li><a href="index.php?page=<?php echo $i ?>"><?php echo $i ?></a></li>
     <?php endfor ?>
 </ul>
+      </div><!-- /.row -->
+    </div><!-- /.blog-main -->
+</div><!-- /.container -->
+
 <?php endif ?>
+
