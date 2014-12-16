@@ -1,3 +1,4 @@
+<script src="//cdn.ckeditor.com/4.4.6/standard/ckeditor.js"></script>
 <h1>Edit a Post</h1>
 <form action="" method="post">
     <div>
@@ -7,6 +8,9 @@
     <div>
         <label for="contents">Contents: </label>
         <textarea name="contents" id="contents" cols="50" rows="15"><?=$post[0]['article']?></textarea>
+	<script>
+	   CKEDITOR.replace( 'contents' );
+	</script>
     </div>
     <div>
         <label for="category">Category: </label>

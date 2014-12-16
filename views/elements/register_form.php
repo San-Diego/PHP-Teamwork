@@ -1,3 +1,15 @@
+<style>
+    h3, form {
+        margin-left: 750px;
+    }
+    h3 {
+        margin-top: 30px;
+    }
+    form {
+        margin-bottom: 30px;
+    }
+</style>
+
 <h3>Register</h3>
 <form method="POST" action="">
     <label>User name:</label>
@@ -5,6 +17,6 @@
     <label>Password:</label>
     <input type="password" name="password" /><br />
     <label>Email:</label>
-    <input type="email" name="email" />
+    <input type="email" name="email" /><br/>
     <input type="submit" value="Register"/><br />
 </form>

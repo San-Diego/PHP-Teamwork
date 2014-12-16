@@ -1,3 +1,15 @@
+<style>
+    form {
+        margin-left: 100px;
+        margin-right: 100px;
+    }
+    h1 {
+        margin-left: 100px;
+        margin-right: 100px;
+    }
+</style>
+
+<script src="//cdn.ckeditor.com/4.4.6/standard/ckeditor.js"></script>
 <h1>Add a Post</h1>
 <form action="" method="post">
     <div>
@@ -7,6 +19,9 @@
     <div>
         <label for="contents">Contents: </label>
         <textarea name="contents" id="contents" cols="50" rows="15"><?php if(isset($_POST['contents'])) echo $_POST['contents'] ?></textarea>
+<script>
+   CKEDITOR.replace( 'contents' );
+</script>
     </div>
     <div>
         <label for="category">Category: </label>
