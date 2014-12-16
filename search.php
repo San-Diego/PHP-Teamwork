@@ -10,7 +10,11 @@ $tags = explode(',', $_GET['search']);
 $posts = [];
 
 foreach($tags as $tag) {
-    $posts = array_merge($posts, get_posts_by_tag($tag));
+    $tmp = get_posts_by_tag($tag);
+
+    if($tmp != null) {
+    $posts = array_merge($posts, $tmp);
+    }
 }
 
 for ($i = 0; isset($posts[$i]); $i++) {
