@@ -32,6 +32,11 @@
     </menu>
     <?php endif ?>
     <?php if($show_comments): ?>
+        <ul>
+        <?php foreach($tags as $tag):?>
+            <li><a href="search.php?search=<?php echo $tag?>"><?php echo htmlentities($tag)?></a></li>
+        <?php endforeach ?>
+        </ul>
         <form method="post" action="add_comment.php">
             <?php if(!isset($_SESSION['user'])): ?>
                 <label for="userName">Your name:</label>

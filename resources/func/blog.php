@@ -47,6 +47,53 @@ function edit_post($id, $title, $contents, $category)
     }
 }
 
+function get_tags_by_post($id) {
+    global $db;
+
+    $query = "
+            SELECT
+                tag_id
+            FROM blog_post_tags
+            WHERE blog_post_id = :id";
+
+    $query_params = array(
+        ':id' => $id
+    );
+
+    try {
+        $stmt = $db->prepare($query);
+        $stmt->execute($query_params);
+    } catch (PDOException $ex) {
+        // remove getMessage on production
+        die("Failed to run query: " . $ex->getMessage());
+    }
+
+    $tags_id = $stmt->fetchAll();
+    $results = [];
+
+    foreach($tags_id as $tag_id) {
+        $query = "
+            SELECT
+                name
+            FROM tags
+            WHERE id = :id";
+
+        $query_params = array(
+            ':id' => $tag_id['tag_id']
+        );
+
+        try {
+            $stmt = $db->prepare($query);
+            $stmt->execute($query_params);
+            $results[] = $stmt->fetch()['name'];
+        } catch (PDOException $ex) {
+            // remove getMessage on production
+            die("Failed to run query: " . $ex->getMessage());
+        }
+    }
+    return $results;
+}
+
 function get_posts_by_tag($tag) {
     global $db;
     $tag = strtolower(trim($tag));

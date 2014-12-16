@@ -25,6 +25,7 @@ $posts = array_reverse($posts);
 $show_comments = count($posts) == 1;
 
 if($show_comments) {
+    $tags = get_tags_by_post($posts[0]['id']);
     $comments = get_comments($posts[0]['id']);
     increase_visits($posts[0]['id']);
 }
