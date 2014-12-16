@@ -258,7 +258,7 @@ function get_categories($db)
 function add_tags($db, $name) {
     foreach ($name as $tag) {
         $result = mysql_query("SELECT `name` FROM `tags` WHERE `name` = $tag");
-        if($result == 0) {
+        if($result == 'false') {
             $query = "INSERT INTO `tags` SET
                     `name` = '{$tag}'";
 
