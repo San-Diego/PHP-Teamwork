@@ -12,9 +12,8 @@ if($num_posts % $count_of_posts != 0) {
     $num_pages++;
 }
 
-$posts = isset($_GET['id']) ? get_posts($_GET['id'], null, $offset, $db) : get_posts(null, null, $offset, $count_of_posts, $db);
+$posts = isset($_GET['id']) ? get_posts($_GET['id'], null, 0, 1, $db) : get_posts(null, null, $offset, $count_of_posts, $db);
 $posts = array_reverse($posts);
-
 
 $show_comments = count($posts) == 1;
 
