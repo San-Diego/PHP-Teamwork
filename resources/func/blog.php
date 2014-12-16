@@ -273,6 +273,21 @@ function add_tags($db, $name) {
     }
 }
 
+function add_tagsToPost($db,$name, $id) {
+    foreach ($name as $tag) {
+        $result = mysql_query("SELECT `id` FROM `tags` WHERE `name` = $tag");
+            $query = "INSERT INTO `blog_post_tags` SET
+                    `tag_id` = `{$tag}`, `blog_post_id` = `{$id}`";
+        try    {
+            /* Execute the query to create the tag*/
+            $stmt = $db->prepare($query);
+            $result = $stmt->execute();
+        }catch(PDOException $ex)    {
+            die("Failed to run query: " . $ex->getMessage());
+        }
+    }
+}
+
 function add_comment($post_ID, $user_name, $content) {
     global $db;
 
