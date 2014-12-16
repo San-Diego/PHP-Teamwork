@@ -13,9 +13,11 @@
 		  <span>User name: <?php echo $_SESSION["user"]["username"] ?></span>
 		  <?php endif ?>
         </nav>
-          <form method="get" action="search.php">
-              <input type="text" name="search"/>
-              <input type="submit" value="Search"/>
+          <form class="navbar-form navbar-right" role="form" method="get" action="search.php">
+		    <div class="form-group">
+              <input type="text" class="form-control" placeholder = "Search" name="search"/>
+			</div>
+              <input type="submit" class="btn btn-default" value="Search"/>
           </form>
       </div>
     </div>
