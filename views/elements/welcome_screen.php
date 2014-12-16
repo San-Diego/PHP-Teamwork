@@ -52,11 +52,13 @@
     <?php endif ?>
 <?php endforeach;
 if (!$show_comments) :?>
-<ul>
-    <?php for($i = 1 ; $i <= $num_pages ; $i++): ?>
-        <li><a href="index.php?page=<?php echo $i ?>"><?php echo $i ?></a></li>
-    <?php endfor ?>
-</ul>
+<nav>
+	<ul class="pager">
+		<?php for($i = 1 ; $i <= $num_pages ; $i++): ?>
+			<li><a href="index.php?page=<?php echo $i ?>"><?php echo $i ?></a></li>
+		<?php endfor ?>
+	</ul>
+</nav>
       </div><!-- /.row -->
     </div><!-- /.blog-main -->
 </div><!-- /.container -->
