@@ -8,8 +8,7 @@ if(!isset($_GET['id'])) {
 }
 
 delete('cat', $_GET['id'], $db);
-
-// We should decide what happens with the posts from deleted category
+remove_posts_category($_GET['id']);
 
 header('Location: category_list.php');
 die();

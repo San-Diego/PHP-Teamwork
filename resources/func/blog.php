@@ -157,11 +157,11 @@ function get_category_id($name) {
         ':name' => $name
     );
 
-    if(isset($id)) {
-        $id = (int)$id;
-        $query .= " WHERE id = :id";
-        $query_params[':id'] = $id;
-    }
+//    if(isset($id)) {
+//        $id = (int)$id;
+//        $query .= " WHERE id = :id";
+//        $query_params[':id'] = $id;
+//    }
 
     try {
         $stmt = $db->prepare($query);
@@ -174,6 +174,31 @@ function get_category_id($name) {
     $row = $stmt->fetch();
     return $row['id'];
 
+}
+
+function get_category_name($id) {
+    global $db;
+
+    $query = "
+            SELECT
+                name
+            FROM cat
+            WHERE id = :id";
+
+    $query_params = array(
+        ':id' => $id
+    );
+
+    try {
+        $stmt = $db->prepare($query);
+        $stmt->execute($query_params);
+    } catch (PDOException $ex) {
+        // remove getMessage on production
+        die("Failed to run query: " . $ex->getMessage());
+    }
+
+    $row = $stmt->fetch();
+    return $row['name'];
 }
 
 function delete($table, $id, $db)
@@ -294,6 +319,25 @@ function get_categories($db)
 
     $rows = $stmt->fetchAll();
     return $rows;
+}
+
+function remove_posts_category($cat_id) {
+    global $db;
+
+    $query = "UPDATE posts SET cat_id = 0 WHERE cat_id = :cat_id";
+
+    $query_params = array(
+        ':cat_id' => $cat_id
+    );
+
+    try {
+        /* Execute the query to create the tag*/
+        $stmt = $db->prepare($query);
+        $stmt->execute($query_params);
+    } catch (PDOException $ex) {
+        die("Failed to run query: " . $ex->getMessage());
+    }
+
 }
 
 function add_tags($db, $name) {

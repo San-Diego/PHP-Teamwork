@@ -20,14 +20,15 @@
     <div>
         <p  class="blog-post-meta">
             Posted on <?php echo date('d-m-Y h:i:s', strtotime($post['date']))?><br />
-            visits: <?php echo $post['visits'] ?>
+            visits: <?php echo $post['visits'] ?><br />
+            category:  <?php echo $post['cat_id'] != 0 ? get_category_name($post['cat_id']) : 'uncategorized' ?>
         </p>
     </div>
     <?php if(isset($_SESSION['user']) && $_SESSION['user']['admin'] == 1): ?>
     <menu>
         <ul>
-            <li><a href="delete_post.php?id=<?php echo $post['id']?>">Delete This Post</a></li>
-            <li><a href="edit_post.php?id=<?php echo $post['id']?>">Edit This Post</a></li>
+            <li><a class="btn btn-danger" href="delete_post.php?id=<?php echo $post['id']?>">Delete This Post</a></li>
+            <li><a class="btn btn-warning" href="edit_post.php?id=<?php echo $post['id']?>">Edit This Post</a></li>
         </ul>
     </menu>
     <?php endif ?>
@@ -57,7 +58,7 @@ if (!$show_comments) :?>
         <li><a href="index.php?page=1">&lt;&lt;</a></li>
         <li><a href="index.php?page=<?php echo $prev_page ?>">&lt;</a></li>
 		<?php for($i = $first_page ; $i <= $last_page ; $i++): ?>
-			<li><a href="index.php?page=<?php echo $i ?>"><?php echo $i ?></a></li>
+			<li class="<?php if($i == $page){ echo 'active'; }?>"><a href="index.php?page=<?php echo $i ?>"><?php echo $i ?></a></li>
 		<?php endfor ?>
         <li><a href="index.php?page=<?php echo $next_page ?>">&gt;</a></li>
         <li><a href="index.php?page=<?php echo $num_pages ?>">&gt;&gt;</a></li>
