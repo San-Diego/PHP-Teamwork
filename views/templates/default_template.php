@@ -30,5 +30,14 @@
     <?php include_once DX_ROOT_DIR . 'views/elements/header.php'; ?>
     <?php include_once DX_ROOT_DIR . $element ?>
     <?php include_once DX_ROOT_DIR . 'views/elements/footer.php'; ?>
-</body>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="../../dist/js/bootstrap.min.js"></script>
+    <script src="../../assets/js/docs.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+  </body>
 </html>

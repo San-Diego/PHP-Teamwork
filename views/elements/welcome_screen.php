@@ -1,15 +1,24 @@
 <?php if(!isset($_SESSION['user'])): ?>
-<h2>Welcome!</h2>
+    <div class="container">
+
+      <div class="blog-header">
+        <h1 class="blog-title">Team San Diego Blog</h1>
+        <p class="lead blog-description">This is the official SoftUni teamwork blog</p>
+      </div>
+
+      <div class="row">
+
+        <div class="col-sm-8 blog-main">
 <div>
     <a href="login.php">Log in</a><br />
     <a href="register.php">Register</a>
 </div>
 <?php endif ?>
 <?php foreach ($posts as $post): ?>
-    <h2><a href="index.php?id=<?php echo $post['id']?>"><?php echo htmlentities($post['title']) ?></a></h2>
-    <div><?php echo nl2br(htmlentities($post['article'])) ?></div>
+    <h2 class="blog-post-title"><a href="index.php?id=<?php echo $post['id']?>"><?php echo htmlentities($post['title']) ?></a></h2>
+    <p><?php echo nl2br(htmlentities($post['article'])) ?></p>
     <div>
-        <p>
+        <p  class="blog-post-meta">
             Posted on <?php echo date('d-m-Y h:i:s', strtotime($post['date']))?><br />
             visits: <?php echo $post['visits'] ?>
         </p>
@@ -48,4 +57,9 @@ if (!$show_comments) :?>
         <li><a href="index.php?page=<?php echo $i ?>"><?php echo $i ?></a></li>
     <?php endfor ?>
 </ul>
+      </div><!-- /.row -->
+    </div><!-- /.blog-main -->
+</div><!-- /.container -->
+
 <?php endif ?>
+
