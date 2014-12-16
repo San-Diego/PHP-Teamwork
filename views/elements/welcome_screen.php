@@ -1,14 +1,13 @@
-<?php if(!isset($_SESSION['user'])): ?>
-    <div class="container">
-
-      <div class="blog-header">
+<div class="container">
+    <div class="blog-header">
         <h1 class="blog-title">Team San Diego Blog</h1>
         <p class="lead blog-description">This is the official SoftUni teamwork blog</p>
-      </div>
+    </div>
 
-      <div class="row">
+    <div class="row">
 
         <div class="col-sm-8 blog-main">
+<?php if(!isset($_SESSION['user'])): ?>
 <div>
     <a href="login.php">Log in</a><br />
     <a href="register.php">Register</a>
