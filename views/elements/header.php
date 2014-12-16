@@ -1,3 +1,10 @@
+<style>
+    header {
+        font-size: 20px;
+        font-family: cursive;
+    }
+</style>
+
 <header>
     <div class="blog-masthead">
       <div class="container">
