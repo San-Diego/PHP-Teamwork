@@ -47,6 +47,77 @@ function edit_post($id, $title, $contents, $category)
     }
 }
 
+function get_posts_by_tag($tag) {
+    global $db;
+    $tag = strtolower(trim($tag));
+
+    $query = "
+            SELECT
+                id
+            FROM tags
+            WHERE name = :name";
+
+    $query_params = array(
+        ':name' => $tag
+    );
+
+    try {
+        $stmt = $db->prepare($query);
+        $stmt->execute($query_params);
+    } catch (PDOException $ex) {
+        // remove getMessage on production
+        die("Failed to run query: " . $ex->getMessage());
+    }
+    $tag_id = $stmt->fetch()['id'];
+
+    if($tag_id) {
+        $query = "
+            SELECT
+                blog_post_id
+            FROM blog_post_tags
+            WHERE tag_id = :tag_id";
+
+        $query_params = array(
+            ':tag_id' => $tag_id
+        );
+
+        try {
+            $stmt = $db->prepare($query);
+            $stmt->execute($query_params);
+        } catch (PDOException $ex) {
+            // remove getMessage on production
+            die("Failed to run query: " . $ex->getMessage());
+        }
+        $posts = $stmt->fetchAll();
+        $return = [];
+
+        foreach($posts as $post) {
+            $query = "
+            SELECT
+                id, title, author, cat_id, date
+            FROM posts
+            WHERE id = :id";
+
+            $query_params = array(
+                ':id' => $post['blog_post_id']
+            );
+
+            try {
+                $stmt = $db->prepare($query);
+                $stmt->execute($query_params);
+            } catch (PDOException $ex) {
+                // remove getMessage on production
+                die("Failed to run query: " . $ex->getMessage());
+            }
+            $res = $stmt->fetch();
+            $return[] = $res;
+        }
+
+        return $return;
+    }
+    return;
+}
+
 function add_category($name, $db)
 {
     $query = "
@@ -123,36 +194,6 @@ function delete($table, $id, $db)
 
 function get_posts($id = null, $cat_id = null, $offset, $count, $db)
 {
-//    $posts = array();
-//
-//    $query = "SELECT `posts`.`id` AS `post_id`,
-//                     `categories`.`id` AS `category_id`,
-//                `title`, `contents`, `date_posted`, `categories`.`name`
-//                FROM `posts`
-//                INNER JOIN `categories` ON `categories`.`id` = `posts`.`cat_id`";
-//
-//    if(isset($id)) {
-//        $id = (int)$id;
-//        $query .= "WHERE `posts`.`id` = '{$id}'";
-//    }
-//
-//    if(isset($cat_id)) {
-//        $cat_id = (int)$cat_id;
-//        $query .= "WHERE `cat_id` = '{$cat_id}'";
-//    }
-//
-//    $query .= "ORDER BY `posts`.`id` DESC";
-//
-//    $query = mysql_query($query);
-//
-//    while($row = mysql_fetch_assoc($query)){
-//        $posts[] = $row;
-//    }
-//
-//    return $posts;
-
-    //============================
-
     $query = "
             SELECT
                 id, title, article, date, cat_id, visits
@@ -257,10 +298,11 @@ function get_categories($db)
 
 function add_tags($db, $name) {
     foreach ($name as $tag) {
+        $t = trim($tag);
 
         $query = "SELECT id FROM tags WHERE name = :tag";
         $query_params = array(
-            ':tag' => $tag
+            ':tag' => $t
         );
         try    {
             /* Execute the query to create the tag*/

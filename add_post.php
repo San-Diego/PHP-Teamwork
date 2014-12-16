@@ -6,7 +6,7 @@ if(isset($_POST['title'], $_POST['contents'], $_POST['category'], $_POST['tags']
     $errors = array();
 
     $title = trim($_POST['title']);
-    $tags = explode(", ", strtolower(trim($_POST['tags'])));
+    $tags = explode(",", strtolower(trim($_POST['tags'])));
     $contents = trim($_POST['contents']);
 
     if (empty($title)) {
@@ -33,7 +33,7 @@ if(isset($_POST['title'], $_POST['contents'], $_POST['category'], $_POST['tags']
 
     if (empty($errors)) {
         add_tags($db,$tags);
-        add_post($db,$title,$contents,$_SESSION['user']['id'],get_category_id($_POST['category']),time());
+        add_post($db,$title,$contents,$_SESSION['user']['id'],get_category_id($_POST['category']), date("Y-m-d H:i:s"));
         $id = $db->lastInsertId();
 		add_tagsToPost($db,$tags, $id);
         header("Location: index.php?id={$id}");

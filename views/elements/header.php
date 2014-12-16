@@ -13,6 +13,10 @@
 		  <span>User name: <?php echo $_SESSION["user"]["username"] ?></span>
 		  <?php endif ?>
         </nav>
+          <form method="get" action="search.php">
+              <input type="text" name="search"/>
+              <input type="submit" value="Search"/>
+          </form>
       </div>
     </div>
 </header>
