@@ -91,7 +91,7 @@ if(!empty($_POST))
         ";
 
     $salt = "hdhwYU*w(544OIOw";
-    $password = md5($_POST['password']+$salt);
+    $password = md5($_POST['password'] . $salt);
 
     $query_params = array(
         ':username' => $_POST['username'],

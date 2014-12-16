@@ -43,7 +43,7 @@ if(!empty($_POST)) {
     if ($row) {
 
 		$salt = "hdhwYU*w(544OIOw";
-		$check_password = md5($_POST['password']+$salt);	
+		$check_password = md5($_POST['password'] . $salt);
 
         if ($check_password === $row['password']) {
             $login_ok = true;
