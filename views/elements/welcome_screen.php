@@ -59,8 +59,9 @@
                             <p>Comment by: <?php echo htmlentities($comment['user_name']) ?></p>
                             <p>Comment:<br/><?php echo htmlentities($comment['content']) ?></p>
                             <?php if (isset($_SESSION['user']) && $_SESSION['user']['admin'] == 1): ?>
-                                <a href="delete_comment.php?id=<?php echo $comment['id'] ?>&post_ID=<?php echo $post['id'] ?>">Delete
-                                    comment</a>
+                                <button onclick="location='delete_comment.php?id=<?php echo $comment['id'] ?>&post_ID=<?php echo $post['id'] ?>'" type="button" class="btn btn-primary btn-sm">
+                                    <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span> Remove comment
+                                </button>
                             <?php endif ?>
                         </div>
                     <?php endforeach ?>
