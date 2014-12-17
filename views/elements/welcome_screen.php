@@ -1,48 +1,11 @@
-<html>
-<head>
-    <style>
-        div#auth {
-            position: absolute;
-            top: -120px;
-            right: -200px;
-        }
-        ul#manipulation {
-            list-style-type: none;
-        }
-        ul li {
-            margin: 10px;
-            display: inline;
-        }
-        a:hover {
-            text-decoration: none;
-            color: deepskyblue;
-        }
-        div#comment {
-            background: #f5f5f5;
-            margin-top: 20px;
-            margin-bottom: 20px;
-        }
-        div#comment p {
-            margin: 10px;
-        }
-    </style>
-</head>
 <body>
     <div class="container">
         <div class="blog-header">
             <h1 class="blog-title">Team San Diego Blog</h1>
             <p class="lead blog-description">This is the official SoftUni teamwork blog</p>
         </div>
-
         <div class="row">
-
             <div class="col-sm-8 blog-main">
-                <?php if(!isset($_SESSION['user'])): ?>
-                    <div id="auth">
-                        <a href="login.php">Log in</a><br />
-                        <a href="register.php">Register</a>
-                    </div>
-                <?php endif ?>
                 <?php foreach ($posts as $post): ?>
                     <h2 class="blog-post-title"><a href="index.php?id=<?php echo $post['id']?>"><?php echo htmlentities($post['title']) ?></a></h2>
                     <p><?php echo nl2br(htmlentities($post['article'])) ?></p>
@@ -104,6 +67,14 @@
             </div><!-- /.blog-main -->
             <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
                 <div class="sidebar-module sidebar-module-inset">
+                    <?php if(!isset($_SESSION['user'])): ?>
+                        <div id="auth">
+                            <a href="login.php">Log in</a><br />
+                            <a href="register.php">Register</a>
+                        </div>
+                    <?php endif ?>
+                </div>
+                <div class="sidebar-module sidebar-module-inset">
                     <h4>About</h4>
                     <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
                 </div>
@@ -138,7 +109,3 @@
     </div><!-- /.container -->
 
     <?php endif ?>
-</body>
-</html>
-
-
