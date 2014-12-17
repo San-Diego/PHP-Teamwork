@@ -1,4 +1,5 @@
-<h1 align="center">Add a Category</h1>
+<div class="container">
+<h2>Add a Category</h2>
 <form action="" method="post">
     <div>
         <label for="name">Name: </label>
@@ -9,3 +10,4 @@
         <input type="submit" value="Add Category"/>
     </div>
 </form>
+</div>

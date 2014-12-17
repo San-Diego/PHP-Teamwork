@@ -1,3 +1,4 @@
+<div class="container">
 <script src="//cdn.ckeditor.com/4.4.6/standard/ckeditor.js"></script>
 <h1>Edit a Post</h1>
 <form action="" method="post">
@@ -28,3 +29,4 @@
         <input type="submit" value="Edit Post"/>
     </div>
 </form>
+</div> <!-- /container -->
