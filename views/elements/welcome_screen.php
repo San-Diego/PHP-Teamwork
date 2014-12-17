@@ -1,7 +1,7 @@
 <div class="container">
     <div class="blog-header">
-        <h1 class="blog-title">Team San Diego Blog</h1>
-        <p class="lead blog-description">This is the official SoftUni teamwork blog</p>
+        <h1 class="blog-title">Awesome Blog</h1>
+        <p class="lead blog-description">This is the official PHP teamwork blog</p>
     </div>
     <div class="row">
         <div class="col-sm-8 blog-main">
@@ -103,7 +103,7 @@
             <div class="sidebar-module">
                 <h4>Elsewhere</h4>
                 <ol class="list-unstyled">
-                    <li><a href="http://github.com/San-Diego/PHP-Teamwork">GitHub</a></li>
+                    <li><a href="http://github.com/San-Diego/PHP-Teamwork" target="_blank">GitHub</a></li>
                 </ol>
             </div>
         </div><!-- /.blog-sidebar -->
