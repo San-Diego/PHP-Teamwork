@@ -1,5 +1,4 @@
 <?php
-
 function add_post($db,$title,$contents,$by,$cat,$time)
 {
    $query = "INSERT INTO posts (title,article,author,cat_id,date) VALUES (:title,:contents,:author,:cat,:time)";
@@ -15,6 +14,31 @@ function add_post($db,$title,$contents,$by,$cat,$time)
         $stmt->execute();
     }catch(PDOException $ex)
     {
+        die("Failed to run query: " . $ex->getMessage());
+    }
+}
+
+function getArchivesArticles($db,$month, $year){
+	$query = "SELECT * FROM posts";
+	try {
+        $stmt = $db->prepare($query);
+        $stmt->execute();
+		$articles = $stmt->fetchAll();
+        
+        foreach($articles as $article) {
+            $date = $article['date'];
+			$DByear = date("Y",$date);
+            $DBmonth = date("F",$date);
+			
+			if($DByear==$year && $DBmonth==$month) {
+				$id = $article['id'];
+				$title = $article['title'];
+				echo "<h2 class='blog-post-title'><a
+                        href='index.php?id=$id'>$title</a>
+                </h2>";
+			}
+        }
+    } catch (PDOException $ex) {
         die("Failed to run query: " . $ex->getMessage());
     }
 }
@@ -64,7 +88,7 @@ function getArchives($db) {
         foreach($years as $yearKey => $year) {
             foreach($year as $monthKey => $monthOutput) {
                 if($monthOutput>0){
-                    echo "<li><a href='#'>$monthKey $yearKey</a></li>";
+                    echo "<li><a href='archive.php?month=$monthKey&year=$yearKey'>$monthKey $yearKey</a></li>";
                 }
             }
         }

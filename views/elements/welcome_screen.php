@@ -11,7 +11,7 @@
                 </h2>
                 <div>
                     <p class="blog-post-meta"><span class="glyphicon glyphicon-time"></span>
-                        Posted on <?php echo date('d-m-Y \a\t h:i', strtotime($post['date'])) ?><br/>
+                        Posted on <?php echo date('d-m-Y \a\t h:i', ($post['date'])) ?><br/>
                         visits: <?php echo $post['visits'] ?><br/>
                         category:  <?php echo $post['cat_id'] != 0 ? get_category_name($post['cat_id']) : 'uncategorized' ?>
                     </p>
