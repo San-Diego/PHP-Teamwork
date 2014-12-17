@@ -16,8 +16,6 @@
                         Category:  <?php echo $post['cat_id'] != 0 ? get_category_name($post['cat_id']) : 'uncategorized' ?>
                     </p>
                 </div>
-                <hr>
-                <p><?php echo nl2br(htmlentities($post['article'])) ?></p>
                 <?php if (isset($_SESSION['user']) && $_SESSION['user']['admin'] == 1): ?>
                     <nav>
                         <div class="btn-group">
@@ -33,6 +31,8 @@
                         </div>
                     </nav>
                 <?php endif ?>
+                <hr>
+                <p><?php echo nl2br(htmlentities($post['article'])) ?></p>
                 <hr>
                 <?php if ($show_comments): ?>
                     <p class="blog-post-meta">
