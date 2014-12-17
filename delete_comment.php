@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 if($_SESSION['user']['admin'] != 1) {
     header('Location: index.php');
