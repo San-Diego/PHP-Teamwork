@@ -20,9 +20,17 @@
                 <p><?php echo nl2br(htmlentities($post['article'])) ?></p>
                 <?php if (isset($_SESSION['user']) && $_SESSION['user']['admin'] == 1): ?>
                     <nav>
-                        <a class="btn btn-danger" href="delete_post.php?id=<?php echo $post['id'] ?>">Delete This
-                            Post</a>
-                        <a class="btn btn-warning" href="edit_post.php?id=<?php echo $post['id'] ?>">Edit This Post</a>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-primary">Action</button>
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                <span class="caret"></span>
+                                <span class="sr-only">Toggle Dropdown</span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="edit_post.php?id=<?php echo $post['id'] ?>">Edit Post</a></li>
+                                <li><a href="delete_post.php?id=<?php echo $post['id'] ?>">Delete Post</a></li>
+                            </ul>
+                        </div>
                     </nav>
                 <?php endif ?>
                 <hr>
