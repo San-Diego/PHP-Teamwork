@@ -147,6 +147,7 @@ function get_tags_by_post($id) {
     }
 
     $tags_id = $stmt->fetchAll();
+
     $results = [];
 
     foreach($tags_id as $tag_id) {
@@ -169,6 +170,7 @@ function get_tags_by_post($id) {
             die("Failed to run query: " . $ex->getMessage());
         }
     }
+
     return $results;
 }
 
@@ -326,11 +328,11 @@ function get_category_name($id) {
     return $row['name'];
 }
 
-function delete($table, $id, $db)
+function delete($table, $id, $col, $db)
 {
     $query = "
             DELETE FROM {$table}
-            WHERE id={$id}
+            WHERE {$col}={$id}
         ";
 
     try {
@@ -514,6 +516,24 @@ function add_tags($db, $name) {
             }
 
         }
+    }
+}
+
+function decrease_tag_count($tag_name)
+{
+    global $db;
+
+    $query = "UPDATE tags SET count=count-1 WHERE name=:tag_name";
+
+    $query_params = array(
+        ':tag_name' => $tag_name
+    );
+
+    try {
+        $stmt = $db->prepare($query);
+        $stmt->execute($query_params);
+    } catch (PDOException $ex) {
+        die("Failed to run query: " . $ex->getMessage());
     }
 }
 
