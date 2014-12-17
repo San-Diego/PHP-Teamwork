@@ -7,7 +7,7 @@ if($_SESSION['user']['admin'] != 1) {
 
 require_once('resources/init.php');
 
-$post = get_posts($_GET['id'], null, 0, 1, $db);
+$post = get_posts($_GET['id'], null, 0, 1);
 $post_id = $_GET['id'];
 
 if(isset($_POST['title'], $_POST['contents'], $_POST['category'])) {

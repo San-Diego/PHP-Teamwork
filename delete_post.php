@@ -21,9 +21,9 @@ foreach($tags_name as $tag_name) {
 }
 
 
-delete('posts', $id, 'id', $db);
-delete('comments', $id, 'post_id', $db);
-delete('blog_post_tags', $id, 'blog_post_id', $db);
+delete('posts', $id, 'id');
+delete('comments', $id, 'post_id');
+delete('blog_post_tags', $id, 'blog_post_id');
 
 header('Location: index.php');
 die();

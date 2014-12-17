@@ -1,7 +1,9 @@
 <?php
-function add_post($db,$title,$contents,$by,$cat,$time)
+function add_post($title,$contents,$by,$cat,$time)
 {
-   $query = "INSERT INTO posts (title,article,author,cat_id,date) VALUES (:title,:contents,:author,:cat,:time)";
+    global $db;
+
+    $query = "INSERT INTO posts (title,article,author,cat_id,date) VALUES (:title,:contents,:author,:cat,:time)";
 
     try
     {
@@ -18,8 +20,11 @@ function add_post($db,$title,$contents,$by,$cat,$time)
     }
 }
 
-function getArchivesArticles($db,$month, $year){
-	$query = "SELECT * FROM posts";
+function getArchivesArticles($month, $year)
+{
+    global $db;
+
+    $query = "SELECT * FROM posts";
 	try {
         $stmt = $db->prepare($query);
         $stmt->execute();
@@ -43,8 +48,11 @@ function getArchivesArticles($db,$month, $year){
     }
 }
 
-function getArchives($db) {
-	$query = "SELECT date FROM posts";
+function getArchives()
+{
+    global $db;
+
+    $query = "SELECT date FROM posts";
 	try {
         $stmt = $db->prepare($query);
         $stmt->execute();
@@ -125,7 +133,8 @@ function edit_post($id, $title, $contents, $category)
     }
 }
 
-function get_tags_by_post($id) {
+function get_tags_by_post($id)
+{
     global $db;
 
     $query = "
@@ -174,8 +183,10 @@ function get_tags_by_post($id) {
     return $results;
 }
 
-function get_posts_by_tag($tag) {
+function get_posts_by_tag($tag)
+{
     global $db;
+
     $tag = strtolower(trim($tag));
 
     $query = "
@@ -245,8 +256,10 @@ function get_posts_by_tag($tag) {
     return;
 }
 
-function add_category($name, $db)
+function add_category($name)
 {
+    global $db;
+
     $query = "
             INSERT INTO cat (
                 name
@@ -271,7 +284,8 @@ function add_category($name, $db)
     }
 }
 
-function get_category_id($name) {
+function get_category_id($name)
+{
     global $db;
 
     $query = "
@@ -296,7 +310,8 @@ function get_category_id($name) {
 
 }
 
-function get_category_name($id) {
+function get_category_name($id)
+{
     global $db;
 
     $query = "
@@ -320,8 +335,10 @@ function get_category_name($id) {
     return $row['name'];
 }
 
-function delete($table, $id, $col, $db)
+function delete($table, $id, $col)
 {
+    global $db;
+
     $query = "
             DELETE FROM {$table}
             WHERE {$col}={$id}
@@ -335,8 +352,10 @@ function delete($table, $id, $col, $db)
     }
 }
 
-function get_posts($id = null, $cat_id = null, $offset, $count, $db)
+function get_posts($id = null, $cat_id = null, $offset, $count)
 {
+    global $db;
+
     $query = "
             SELECT
                 id, title, article, date, cat_id, visits
@@ -389,8 +408,10 @@ function increase_visits($id) {
     }
 }
 
-function category_exist($name, $db)
+function category_exist($name)
 {
+     global $db;
+
 	 $query = "
 	 SELECT
 	 1
@@ -417,8 +438,10 @@ function category_exist($name, $db)
 	 return false;
 }
 
-function get_categories($db)
+function get_categories()
 {
+    global $db;
+
     $query = "
             SELECT
                 id, name
@@ -454,7 +477,9 @@ function remove_posts_category($cat_id) {
 
 }
 
-function add_tags($db, $name) {
+function add_tags($name) {
+    global $db;
+
     foreach ($name as $tag) {
         $t = trim($tag);
 
@@ -521,7 +546,9 @@ function decrease_tag_count($tag_name)
     }
 }
 
-function add_tagsToPost($db,$name, $id) {
+function add_tagsToPost($name, $id) {
+    global $db;
+
     foreach ($name as $tag) {
         $query = "SELECT id FROM tags WHERE name = :tag";
 

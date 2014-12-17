@@ -12,14 +12,14 @@ if(isset($_POST['name'])) {
 
     if(empty($name)) {
         $error = 'You must submit a category name!';
-    } elseif(category_exist($name, $db)) {
+    } elseif(category_exist($name)) {
         $error = 'That category already exists';
     } elseif(strlen($name) > 30) {
         $error = "Category names can only be up to 30 chars.";
     }
 
     if(!isset($error)) {
-        add_category($name, $db);
+        add_category($name);
         header('Location: add_post.php');
     }else {
         echo $error;

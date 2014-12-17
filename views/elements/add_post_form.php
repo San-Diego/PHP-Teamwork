@@ -17,7 +17,7 @@
         <label for="category">Category: </label>
         <select name="category" id="category">
             <?php
-            $categories = get_categories($db);
+            $categories = get_categories();
             foreach ($categories as $category):
                 ?>
                 <option value="<?php echo htmlentities($category['name']) ?>"><?php echo htmlentities($category['name']) ?></option>

@@ -31,7 +31,7 @@
                 <h4>Archives</h4>
                 <ol class="list-unstyled">
                     <?php
-						getArchives($db);
+						getArchives();
 					?>
                 </ol>
             </div>

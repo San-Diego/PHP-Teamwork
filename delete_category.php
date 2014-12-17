@@ -12,7 +12,7 @@ if(!isset($_GET['id'])) {
     die();
 }
 
-delete('cat', $_GET['id'], 'id', $db);
+delete('cat', $_GET['id'], 'id');
 remove_posts_category($_GET['id']);
 
 header('Location: category_list.php');

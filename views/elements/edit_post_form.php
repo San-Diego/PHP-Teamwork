@@ -17,7 +17,7 @@
         <label for="category">Category: </label>
         <select name="category" id="category">
             <?php
-            $categories = get_categories($db);
+            $categories = get_categories();
             foreach ($categories as $category):
                 $selected = ($category['name'] == $post[0]['name']) ? 'selected' : '';
                 ?>
