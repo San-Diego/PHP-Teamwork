@@ -1,5 +1,7 @@
+<div class="container">
+    <h2>Search Results</h2>
 <?php foreach ($posts as $post): ?>
-    <h2><a href="index.php?id=<?php echo $post['id']?>"><?php echo htmlentities($post['title']) ?></a></h2>
+    <h3><a href="index.php?id=<?php echo $post['id']?>"><?php echo htmlentities($post['title']) ?></a></h3>
     <div>
         <p>
             Posted on <?php echo date('d-m-Y h:i:s', strtotime($post['date']))?>
@@ -14,3 +16,4 @@
         </menu>
     <?php endif ?>
 <?php endforeach; ?>
+</div> <!-- /container -->
