@@ -1,5 +1,5 @@
 <div class="container">
-    <h2 >List of Categories</h2>
+    <h1>List of Categories</h1>
 <?php
 foreach ($categories as $category):
     ?>

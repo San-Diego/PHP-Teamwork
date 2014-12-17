@@ -1,5 +1,5 @@
 <div class="container">
-    <h2>Search Results</h2>
+    <h1>Search Results</h1>
 <?php foreach ($posts as $post): ?>
     <h3><a href="index.php?id=<?php echo $post['id']?>"><?php echo htmlentities($post['title']) ?></a></h3>
     <div>

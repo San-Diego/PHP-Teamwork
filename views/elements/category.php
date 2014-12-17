@@ -1,5 +1,5 @@
 <div class="container">
-    <h2>Display category - <?php echo $categoryName ?></h2>
+    <h1>Display category - <?php echo $categoryName ?></h1>
 <?php foreach ($posts as $post): ?>
 <h2><a href="index.php?id=<?php echo $post['id']?>"><?php echo htmlentities($post['title']) ?></a></h2>
 <div>
