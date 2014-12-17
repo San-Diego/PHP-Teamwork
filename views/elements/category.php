@@ -1,4 +1,5 @@
-<h1>Display category - <?php echo $categoryName ?></h1>
+<div class="container">
+    <h2>Display category - <?php echo $categoryName ?></h2>
 <?php foreach ($posts as $post): ?>
 <h2><a href="index.php?id=<?php echo $post['id']?>"><?php echo htmlentities($post['title']) ?></a></h2>
 <div>
@@ -15,3 +16,4 @@
     </menu>
     <?php endif ?>
 <?php endforeach; ?>
+</div> <!-- /container -->

@@ -1,12 +1,13 @@
-<h1 align="center">Category List</h1>
+<div class="container">
+    <h2 >List of Categories</h2>
 <?php
-
 foreach ($categories as $category):
     ?>
     <p>
-        <a href="category.php?id=<?php echo $category['id'] ?>&name=<?php echo $category['name']?>"><?php echo htmlentities($category['name']) ?></a> -
+        <a href="category.php?id=<?php echo $category['id'] ?>&name=<?php echo $category['name']?>"><?php echo htmlentities($category['name']) ?></a>
         <?php if(isset($_SESSION['user']) && $_SESSION['user']['admin'] == 1): ?>
-        <a href="delete_category.php?id=<?php echo $category['id']?>">Delete Category</a>
+        <a href="delete_category.php?id=<?php echo $category['id']?>"> - Delete Category</a>
         <?php endif ?>
     </p>
 <?php endforeach; ?>
+</div> <!-- /container -->
