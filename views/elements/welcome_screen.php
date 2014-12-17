@@ -66,14 +66,16 @@
                 </nav>
             </div><!-- /.blog-main -->
             <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
-                <div class="sidebar-module sidebar-module-inset">
                     <?php if(!isset($_SESSION['user'])): ?>
-                        <div id="auth">
+                        <div class="sidebar-module sidebar-module-inset">
                             <a href="login.php">Log in</a><br />
                             <a href="register.php">Register</a>
                         </div>
-                    <?php endif ?>
-                </div>
+                    <?php else:?>
+                         <div class="sidebar-module sidebar-module-inset">
+                            <a href="logout.php">Log out</a><br />
+                        </div>
+                <?php endif ?>
                 <div class="sidebar-module sidebar-module-inset">
                     <h4>About</h4>
                     <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>

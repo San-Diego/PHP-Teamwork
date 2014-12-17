@@ -19,8 +19,7 @@
                         <li><a href="add_category.php">Add a Category</a></li>
                     <?php endif ?>
                     <?php if(isset($_SESSION["user"])): ?>
-                        <li><a href="logout.php">Log out</a></li>
-                        <span class="bg-primary">User name: <?php echo $_SESSION["user"]["username"] ?></span>
+                        <li><a href="#">User name: <?php echo $_SESSION["user"]["username"] ?></a></li>
                     <?php endif ?>
                 </ul>
                 <form class="navbar-form navbar-right" role="form" method="get" action="search.php">
