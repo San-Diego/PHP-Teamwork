@@ -1,5 +1,5 @@
 <h1 align="center">Add a Category</h1>
-<form action="" method="post" align="center">
+<form action="" method="post">
     <div>
         <label for="name">Name: </label>
         <input type="text" name="name" id="name"/>
