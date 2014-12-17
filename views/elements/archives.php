@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-sm-8 blog-main">
             <?php
-				getArchivesArticles($db,htmlspecialchars($_GET['month']),(int)$_GET['year']);
+				getArchivesArticles(htmlspecialchars($_GET['month']),(int)$_GET['year']);
 			?>
         </div>
         <!-- /.blog-main -->
