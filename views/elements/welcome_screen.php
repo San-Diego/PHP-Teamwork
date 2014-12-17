@@ -9,14 +9,15 @@
                 <h2 class="blog-post-title"><a
                         href="index.php?id=<?php echo $post['id'] ?>"><?php echo htmlentities($post['title']) ?></a>
                 </h2>
-                <p><?php echo nl2br(htmlentities($post['article'])) ?></p>
                 <div>
-                    <p class="blog-post-meta">
-                        Posted on <?php echo date('d-m-Y h:i:s', strtotime($post['date'])) ?><br/>
+                    <p class="blog-post-meta"><span class="glyphicon glyphicon-time"></span>
+                        Posted on <?php echo date('d-m-Y \a\t h:i', strtotime($post['date'])) ?><br/>
                         visits: <?php echo $post['visits'] ?><br/>
                         category:  <?php echo $post['cat_id'] != 0 ? get_category_name($post['cat_id']) : 'uncategorized' ?>
                     </p>
                 </div>
+                <p><?php echo nl2br(htmlentities($post['article'])) ?></p>
+
                 <?php if (isset($_SESSION['user']) && $_SESSION['user']['admin'] == 1): ?>
                     <nav>
                         <a class="btn btn-danger" href="delete_post.php?id=<?php echo $post['id'] ?>">Delete This
