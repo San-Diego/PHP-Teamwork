@@ -14,7 +14,7 @@ function add_post($db,$title,$contents,$by,$cat,$time)
         $stmt->execute();
     }catch(PDOException $ex)
     {
-        die("Failed to run query: " . $ex->getMessage());
+        die("Failed to run query: ");
     }
 }
 
@@ -39,7 +39,7 @@ function getArchivesArticles($db,$month, $year){
 			}
         }
     } catch (PDOException $ex) {
-        die("Failed to run query: " . $ex->getMessage());
+        die("Failed to run query: ");
     }
 }
 
@@ -93,7 +93,7 @@ function getArchives($db) {
             }
         }
     } catch (PDOException $ex) {
-        die("Failed to run query: " . $ex->getMessage());
+        die("Failed to run query: ");
     }
 }
 
@@ -121,7 +121,7 @@ function edit_post($id, $title, $contents, $category)
         $result = $stmt->execute($query_params);
     }catch(PDOException $ex)
     {
-        die("Failed to run query: " . $ex->getMessage());
+        die("Failed to run query: ");
     }
 }
 
@@ -143,7 +143,7 @@ function get_tags_by_post($id) {
         $stmt->execute($query_params);
     } catch (PDOException $ex) {
         // remove getMessage on production
-        die("Failed to run query: " . $ex->getMessage());
+        die("Failed to run query: ");
     }
 
     $tags_id = $stmt->fetchAll();
@@ -167,7 +167,7 @@ function get_tags_by_post($id) {
             $results[] = $stmt->fetch()['name'];
         } catch (PDOException $ex) {
             // remove getMessage on production
-            die("Failed to run query: " . $ex->getMessage());
+            die("Failed to run query: ");
         }
     }
 
@@ -193,7 +193,7 @@ function get_posts_by_tag($tag) {
         $stmt->execute($query_params);
     } catch (PDOException $ex) {
         // remove getMessage on production
-        die("Failed to run query: " . $ex->getMessage());
+        die("Failed to run query: ");
     }
     $tag_id = $stmt->fetch()['id'];
 
@@ -213,7 +213,7 @@ function get_posts_by_tag($tag) {
             $stmt->execute($query_params);
         } catch (PDOException $ex) {
             // remove getMessage on production
-            die("Failed to run query: " . $ex->getMessage());
+            die("Failed to run query: ");
         }
         $posts = $stmt->fetchAll();
         $return = [];
@@ -234,7 +234,7 @@ function get_posts_by_tag($tag) {
                 $stmt->execute($query_params);
             } catch (PDOException $ex) {
                 // remove getMessage on production
-                die("Failed to run query: " . $ex->getMessage());
+                die("Failed to run query: ");
             }
             $res = $stmt->fetch();
             $return[] = $res;
@@ -267,7 +267,7 @@ function add_category($name, $db)
     }
     catch(PDOException $ex)
     {
-        die("Failed to run query: " . $ex->getMessage());
+        die("Failed to run query: ");
     }
 }
 
@@ -284,18 +284,11 @@ function get_category_id($name) {
         ':name' => $name
     );
 
-//    if(isset($id)) {
-//        $id = (int)$id;
-//        $query .= " WHERE id = :id";
-//        $query_params[':id'] = $id;
-//    }
-
     try {
         $stmt = $db->prepare($query);
         $stmt->execute($query_params);
     } catch (PDOException $ex) {
-        // remove getMessage on production
-        die("Failed to run query: " . $ex->getMessage());
+        die("Failed to run query: ");
     }
 
     $row = $stmt->fetch();
@@ -320,8 +313,7 @@ function get_category_name($id) {
         $stmt = $db->prepare($query);
         $stmt->execute($query_params);
     } catch (PDOException $ex) {
-        // remove getMessage on production
-        die("Failed to run query: " . $ex->getMessage());
+        die("Failed to run query: ");
     }
 
     $row = $stmt->fetch();
@@ -339,8 +331,7 @@ function delete($table, $id, $col, $db)
         $stmt = $db->prepare($query);
         $stmt->execute();
     } catch (PDOException $ex) {
-        // remove getMessage on production
-        die("Failed to run query: " . $ex->getMessage());
+        die("Failed to run query: ");
     }
 }
 
@@ -371,8 +362,7 @@ function get_posts($id = null, $cat_id = null, $offset, $count, $db)
         $stmt = $db->prepare($query);
         $stmt->execute($query_params);
     } catch (PDOException $ex) {
-        // remove getMessage on production
-        die("Failed to run query: " . $ex->getMessage());
+        die("Failed to run query: ");
     }
 
     $rows = $stmt->fetchAll();
@@ -395,7 +385,7 @@ function increase_visits($id) {
     }
     catch(PDOException $ex)
     {
-        die("Failed to run query: " . $ex->getMessage());
+        die("Failed to run query: ");
     }
 }
 
@@ -415,10 +405,9 @@ function category_exist($name, $db)
 
 	 try {
 	 $stmt = $db->prepare($query);
-	 $result = $stmt->execute($query_params);
+	 $stmt->execute($query_params);
 	 } catch (PDOException $ex) {
-	 // remove getMessage on production
-	 die("Failed to run query: " . $ex->getMessage());
+	 die("Failed to run query: ");
 	 }
 
 	 $row = $stmt->fetch();
@@ -440,8 +429,7 @@ function get_categories($db)
         $stmt = $db->prepare($query);
         $stmt->execute();
     } catch (PDOException $ex) {
-        // remove getMessage on production
-        die("Failed to run query: " . $ex->getMessage());
+        die("Failed to run query: ");
     }
 
     $rows = $stmt->fetchAll();
@@ -458,11 +446,10 @@ function remove_posts_category($cat_id) {
     );
 
     try {
-        /* Execute the query to create the tag*/
         $stmt = $db->prepare($query);
         $stmt->execute($query_params);
     } catch (PDOException $ex) {
-        die("Failed to run query: " . $ex->getMessage());
+        die("Failed to run query: ");
     }
 
 }
@@ -476,13 +463,12 @@ function add_tags($db, $name) {
             ':tag' => $t
         );
         try    {
-            /* Execute the query to create the tag*/
             $stmt = $db->prepare($query);
             $stmt->execute($query_params);
             $result = $stmt->fetch();
             $tag_id = $result['id'];
         }catch(PDOException $ex)    {
-            die("Failed to run query: " . $ex->getMessage());
+            die("Failed to run query: ");
         }
 
         if(empty($result)) {
@@ -494,11 +480,10 @@ function add_tags($db, $name) {
             );
 
             try {
-                /* Execute the query to create the tag*/
                 $stmt = $db->prepare($query);
                 $stmt->execute($query_params);
             } catch (PDOException $ex) {
-                die("Failed to run query: " . $ex->getMessage());
+                die("Failed to run query: ");
             }
         } else {
             $query = "UPDATE tags SET count=count+1 WHERE id=:tag_id";
@@ -508,11 +493,10 @@ function add_tags($db, $name) {
             );
 
             try {
-                /* Execute the query to create the tag*/
                 $stmt = $db->prepare($query);
                 $stmt->execute($query_params);
             } catch (PDOException $ex) {
-                die("Failed to run query: " . $ex->getMessage());
+                die("Failed to run query: ");
             }
 
         }
@@ -533,7 +517,7 @@ function decrease_tag_count($tag_name)
         $stmt = $db->prepare($query);
         $stmt->execute($query_params);
     } catch (PDOException $ex) {
-        die("Failed to run query: " . $ex->getMessage());
+        die("Failed to run query: ");
     }
 }
 
@@ -545,11 +529,10 @@ function add_tagsToPost($db,$name, $id) {
             ':tag' => $tag
         );
         try    {
-            /* Execute the query to create the tag*/
             $stmt = $db->prepare($query);
             $stmt->execute($query_params);
         }catch(PDOException $ex)    {
-            die("Failed to run query: " . $ex->getMessage());
+            die("Failed to run query: ");
         }
 
         $tag_id = $stmt->fetch()['id'];
@@ -557,11 +540,10 @@ function add_tagsToPost($db,$name, $id) {
             $query = "INSERT INTO blog_post_tags SET
                     tag_id = {$tag_id}, blog_post_id = {$id}";
         try    {
-            /* Execute the query to create the tag*/
             $stmt = $db->prepare($query);
             $stmt->execute();
         }catch(PDOException $ex)    {
-            die("Failed to run query: " . $ex->getMessage());
+            die("Failed to run query: ");
         }
     }
 }
@@ -585,13 +567,12 @@ function add_comment($post_ID, $user_name, $content) {
 
     try
     {
-        // Execute the query to create the user
         $stmt = $db->prepare($query);
         $stmt->execute($query_params);
     }
     catch(PDOException $ex)
     {
-        die("Failed to run query: " . $ex->getMessage());
+        die("Failed to run query: ");
     }
 }
 
@@ -613,8 +594,7 @@ function get_comments($post_id) {
         $stmt = $db->prepare($query);
         $stmt->execute($query_params);
     } catch (PDOException $ex) {
-        // remove getMessage on production
-        die("Failed to run query: " . $ex->getMessage());
+        die("Failed to run query: ");
     }
 
     $rows = $stmt->fetchAll();
@@ -628,15 +608,13 @@ function get_number_of_rows($tab, $col) {
 
     $query_params = array(
         ':col' => $col,
-        //':tab' => $tab
     );
 
     try {
         $stmt = $db->prepare($query);
         $stmt->execute($query_params);
     } catch (PDOException $ex) {
-        // remove getMessage on production
-        die("Failed to run query: " . $ex->getMessage());
+        die("Failed to run query: ");
     }
 
     return $stmt->fetch()["COUNT('$col')"];
