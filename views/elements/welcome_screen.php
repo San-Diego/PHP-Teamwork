@@ -1,4 +1,3 @@
-<body>
     <div class="container">
         <div class="blog-header">
             <h1 class="blog-title">Team San Diego Blog</h1>
@@ -17,12 +16,10 @@
                         </p>
                     </div>
                     <?php if(isset($_SESSION['user']) && $_SESSION['user']['admin'] == 1): ?>
-                        <menu>
-                            <ul id="manipulation">
-                                <li><a class="btn btn-danger" href="delete_post.php?id=<?php echo $post['id']?>">Delete This Post</a></li>
-                                <li><a class="btn btn-warning" href="edit_post.php?id=<?php echo $post['id']?>">Edit This Post</a></li>
-                            </ul>
-                        </menu>
+                        <nav>
+                            <a class="btn btn-danger" href="delete_post.php?id=<?php echo $post['id']?>">Delete This Post</a>
+                            <a class="btn btn-warning" href="edit_post.php?id=<?php echo $post['id']?>">Edit This Post</a>
+                        </nav>
                     <?php endif ?>
                     <?php if($show_comments): ?>
                         <ul>
