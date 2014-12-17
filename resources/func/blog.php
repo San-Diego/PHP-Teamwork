@@ -19,6 +19,60 @@ function add_post($db,$title,$contents,$by,$cat,$time)
     }
 }
 
+function getArchives($db) {
+	$query = "SELECT date FROM posts";
+	try {
+        $stmt = $db->prepare($query);
+        $stmt->execute();
+		$dates = $stmt->fetchAll();
+        $years = array(
+            2013 => array(
+                'January' => 0,
+                'February' => 0,
+                'March' => 0,
+                'April' => 0,
+                'May' => 0,
+                'June' => 0,
+                'July' => 0,
+                'August' => 0,
+                'September' => 0,
+                'October' => 0,
+                'November' => 0,
+                'December' => 0,
+            ),
+            2014 => array(
+                'January' => 0,
+                'February' => 0,
+                'March' => 0,
+                'April' => 0,
+                'May' => 0,
+                'June' => 0,
+                'July' => 0,
+                'August' => 0,
+                'September' => 0,
+                'October' => 0,
+                'November' => 0,
+                'December' => 0,
+            )
+        );
+        foreach($dates as $date) {
+            $year = date("Y",$date['date']);
+            $month = date("F",$date['date']);
+            $years[$year][$month]++;
+        }
+
+        foreach($years as $yearKey => $year) {
+            foreach($year as $monthKey => $monthOutput) {
+                if($monthOutput>0){
+                    echo "<li><a href='#'>$monthKey $yearKey</a></li>";
+                }
+            }
+        }
+    } catch (PDOException $ex) {
+        die("Failed to run query: " . $ex->getMessage());
+    }
+}
+
 function edit_post($id, $title, $contents, $category)
 {
     global $db;
