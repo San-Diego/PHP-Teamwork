@@ -1,4 +1,10 @@
 <?php
+
+if($_SESSION['user']['admin'] != 1) {
+    header('Location: index.php');
+    die();
+}
+
 require_once('resources/init.php');
 
 $post = get_posts($_GET['id'], null, 0, 1, $db);
