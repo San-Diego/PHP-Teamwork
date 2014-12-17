@@ -18,6 +18,31 @@ function add_post($db,$title,$contents,$by,$cat,$time)
     }
 }
 
+function getArchivesArticles($db,$month, $year){
+	$query = "SELECT * FROM posts";
+	try {
+        $stmt = $db->prepare($query);
+        $stmt->execute();
+		$articles = $stmt->fetchAll();
+        
+        foreach($articles as $article) {
+            $date = $article['date'];
+			$DByear = date("Y",$date);
+            $DBmonth = date("F",$date);
+			
+			if($DByear==$year && $DBmonth==$month) {
+				$id = $article['id'];
+				$title = $article['title'];
+				echo "<h2 class='blog-post-title'><a
+                        href='index.php?id=$id'>$title</a>
+                </h2>";
+			}
+        }
+    } catch (PDOException $ex) {
+        die("Failed to run query: " . $ex->getMessage());
+    }
+}
+
 function getArchives($db) {
 	$query = "SELECT date FROM posts";
 	try {
