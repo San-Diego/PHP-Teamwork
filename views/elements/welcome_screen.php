@@ -32,7 +32,7 @@
                     </nav>
                 <?php endif ?>
                 <hr>
-                <p><?php echo nl2br(htmlentities($post['article'])) ?></p>
+                <p><?php echo $post['article'] ?></p>
                 <hr>
                 <?php if ($show_comments): ?>
                     <p class="blog-post-meta">
