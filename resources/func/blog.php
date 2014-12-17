@@ -1,5 +1,4 @@
 <?php
-
 function add_post($db,$title,$contents,$by,$cat,$time)
 {
    $query = "INSERT INTO posts (title,article,author,cat_id,date) VALUES (:title,:contents,:author,:cat,:time)";
@@ -64,7 +63,7 @@ function getArchives($db) {
         foreach($years as $yearKey => $year) {
             foreach($year as $monthKey => $monthOutput) {
                 if($monthOutput>0){
-                    echo "<li><a href='#'>$monthKey $yearKey</a></li>";
+                    echo "<li><a href='archive.php?month=$monthKey&year=$yearKey'>$monthKey $yearKey</a></li>";
                 }
             }
         }

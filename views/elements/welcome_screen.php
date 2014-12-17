@@ -12,7 +12,7 @@
                 <p><?php echo nl2br(htmlentities($post['article'])) ?></p>
                 <div>
                     <p class="blog-post-meta">
-                        Posted on <?php echo date('d-m-Y h:i:s', strtotime($post['date'])) ?><br/>
+                        Posted on <?php echo date('d-m-Y h:i:s', $post['date']) ?><br/>
                         visits: <?php echo $post['visits'] ?><br/>
                         category:  <?php echo $post['cat_id'] != 0 ? get_category_name($post['cat_id']) : 'uncategorized' ?>
                     </p>
