@@ -6,9 +6,6 @@ if(isset($_SESSION['user'])) {
     die('Already logged in, redirecting to index.php');
 }
 
-$element = 'views/elements/login_form.php';
-include_once DX_ROOT_DIR . 'views/templates/default_template.php';
-
 $submitted_username = '';
 
 if(!empty($_POST)) {
@@ -60,10 +57,12 @@ if(!empty($_POST)) {
         header("Location: index.php");
         die("Redirecting to: index.php");
     } else {
-
-        print("Login Failed.");
+        $error = "Login Failed.";
+        //print("Login Failed.");
 
         $submitted_username = htmlentities($_POST['username'], ENT_QUOTES, 'UTF-8');
     }
 }
+$element = 'views/elements/login_form.php';
+include_once DX_ROOT_DIR . 'views/templates/default_template.php';
 ?>

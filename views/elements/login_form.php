@@ -18,3 +18,6 @@
     <input type="password" name="password" /><br/>
     <input type="submit" value="Log in"/><br />
 </form>
+<?php if(isset($error)): ?>
+    <p class="text-center alert alert-danger"><?php echo $error ?></p>
+<?php endif ?>
