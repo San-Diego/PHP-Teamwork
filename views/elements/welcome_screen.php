@@ -12,12 +12,12 @@
                 <div>
                     <p class="blog-post-meta"><span class="glyphicon glyphicon-time"></span>
                         Posted on <?php echo date('d-m-Y \a\t h:i', ($post['date'])) ?><br/>
-                        visits: <?php echo $post['visits'] ?><br/>
-                        category:  <?php echo $post['cat_id'] != 0 ? get_category_name($post['cat_id']) : 'uncategorized' ?>
+                        Seen: <?php echo $post['visits'] ?> times<br/>
+                        Category:  <?php echo $post['cat_id'] != 0 ? get_category_name($post['cat_id']) : 'uncategorized' ?>
                     </p>
                 </div>
+                <hr>
                 <p><?php echo nl2br(htmlentities($post['article'])) ?></p>
-
                 <?php if (isset($_SESSION['user']) && $_SESSION['user']['admin'] == 1): ?>
                     <nav>
                         <a class="btn btn-danger" href="delete_post.php?id=<?php echo $post['id'] ?>">Delete This
@@ -25,28 +25,31 @@
                         <a class="btn btn-warning" href="edit_post.php?id=<?php echo $post['id'] ?>">Edit This Post</a>
                     </nav>
                 <?php endif ?>
+                <hr>
                 <?php if ($show_comments): ?>
-                    <ul>
-                        Tags:
+                    <p class="blog-post-meta">
+                        Tagged:
                         <?php foreach ($tags as $tag): ?>
-                            <li><a href="search.php?search=<?php echo $tag ?>"><?php echo htmlentities($tag) ?></a></li>
+                            <a class="btn btn-xs btn-primary" href="search.php?search=<?php echo $tag ?>"><?php echo htmlentities($tag) ?></a>
                         <?php endforeach ?>
-                    </ul>
+                    </p>
                     <form method="post" action="add_comment.php">
                         <?php if (!isset($_SESSION['user'])): ?>
                             <label for="userName">Your name:</label>
                             <input type="text" name="user_name" id="userName"/><br/>
                         <?php endif ?>
-                        <label for="comment">Your comment:</label>
-                        <input type="text" name="content" id="comment"/>
-                        <input type="submit" value="Add comment"/>
+                        <label for="comment">Write a new comment:</label>
+                        <div class="form-group">
+                        <textarea class="form-control" name="content" id="comment" rows="5"></textarea>
+                        </div>
+                        <input type="submit" class="btn" value="Add comment"/>
                         <input type="hidden" name="post_id" value="<?php echo $post['id'] ?>"/>
                     </form>
                     <?php foreach ($comments as $comment): ?>
                         <div id="comment">
-                            <p>Username: <?php echo htmlentities($comment['user_name']) ?></p>
-
-                            <p>Content:<br/><?php echo htmlentities($comment['content']) ?></p>
+                            <hr>
+                            <p>Comment by: <?php echo htmlentities($comment['user_name']) ?></p>
+                            <p>Comment:<br/><?php echo htmlentities($comment['content']) ?></p>
                             <?php if (isset($_SESSION['user']) && $_SESSION['user']['admin'] == 1): ?>
                                 <a href="delete_comment.php?id=<?php echo $comment['id'] ?>&post_ID=<?php echo $post['id'] ?>">Delete
                                     comment</a>
@@ -100,9 +103,7 @@
             <div class="sidebar-module">
                 <h4>Elsewhere</h4>
                 <ol class="list-unstyled">
-                    <li><a href="#">GitHub</a></li>
-                    <li><a href="#">Twitter</a></li>
-                    <li><a href="#">Facebook</a></li>
+                    <li><a href="http://github.com/San-Diego/PHP-Teamwork">GitHub</a></li>
                 </ol>
             </div>
         </div><!-- /.blog-sidebar -->
