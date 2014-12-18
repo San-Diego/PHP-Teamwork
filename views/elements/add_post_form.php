@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container"><br/><br/>
 <script src="//cdn.ckeditor.com/4.4.6/standard/ckeditor.js"></script>
 <h1>Add a Post</h1>
 <form action="" method="post">

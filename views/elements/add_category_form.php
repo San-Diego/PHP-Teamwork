@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container"><br/><br/>
 <h2>Add a Category</h2>
 <form action="" method="post">
     <div>

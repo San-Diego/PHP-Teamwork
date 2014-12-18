@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container"><br/><br/>
     <h1>List of Categories</h1>
 <?php
 foreach ($categories as $category):

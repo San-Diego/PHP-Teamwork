@@ -5,7 +5,7 @@ if($_SESSION['user']['admin'] != 1) {
     header('Location: index.php');
     die();
 }
-
+error_reporting(0);
 require_once('resources/init.php');
 
 if(isset($_POST['name'])) {
