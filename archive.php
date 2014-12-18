@@ -33,6 +33,3 @@ if ($show_comments) {
 // $element =  path to the html element you need e.g. form, aside, post... DX_ROOT_DIR . /views/elements/placeholder
 $element = 'views/elements/archives.php';
 include_once DX_ROOT_DIR . 'views/templates/default_template.php';
-
-
- 

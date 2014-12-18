@@ -29,5 +29,3 @@ if (isset($_POST['name'])) {
 
 $element = 'views/elements/add_category_form.php';
 include_once DX_ROOT_DIR . 'views/templates/default_template.php';
-
- 

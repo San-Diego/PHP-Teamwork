@@ -53,7 +53,3 @@ include_once DX_ROOT_DIR . 'views/templates/default_template.php';
 if (isset($errors) && !empty($errors)) {
     echo "<ul><li>" . implode('</li><li>', $errors) . "</li></ul>";
 }
-?>
-
-
- 
