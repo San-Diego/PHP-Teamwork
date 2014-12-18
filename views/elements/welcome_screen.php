@@ -111,9 +111,9 @@
             </div>
             <div class="sidebar-module">
                 <h4>Most popular tags<h4>
-                        <ol>
-                           <li><?php display_most_popular_tags(); ?></li>
-                        </ol>
+                <ol class="list-unstyled">
+                   <?php display_most_popular_tags(); ?>
+                </ol>
             </div>
             <div class="sidebar-module">
                 <h4>Archives</h4>

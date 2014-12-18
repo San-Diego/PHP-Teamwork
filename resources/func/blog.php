@@ -677,10 +677,10 @@ function display_most_popular_tags() {
                     $index++;
                 } else {
                     if($t != 1) {
-                        echo "$t times";
+                        echo "<li>$t times</li";
                         $index++;
                     } else {
-                        echo "$t time";
+                        echo "<li>$t time</li>";
                         $index++;
                     }
 
