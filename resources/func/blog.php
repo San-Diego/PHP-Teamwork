@@ -643,5 +643,53 @@ function get_number_of_rows($tab, $col)
     return $stmt->fetch()["COUNT('$col')"];
 }
 
+function get_most_popular_tags(){
+    global $db;
+
+    $query = "
+            SELECT
+                name,
+                count
+            FROM tags
+            ORDER BY count DESC";
+
+    try {
+        $stmt = $db->prepare($query);
+        $stmt->execute();
+    } catch (PDOException $ex) {
+        die("Failed to run query: ");
+    }
+
+    $row = $stmt->fetchAll();
+    return $row;
+
+}
+
+function display_most_popular_tags() {
+    $a = get_most_popular_tags();
+    $i = 0;
+    $index = 0;
+    foreach ($a as $innerArr) {
+        foreach ($innerArr as $t) {
+            if($i < 8) {
+                if($index % 2 == 0) {
+                    echo "$t visited ";
+                    $index++;
+                } else {
+                    if($t != 1) {
+                        echo "$t times <br>";
+                        $index++;
+                    } else {
+                        echo "$t time <br>";
+                        $index++;
+                    }
+
+                }
+                $i++;
+            }
+        }
+    }
+}
+
 ?>
  

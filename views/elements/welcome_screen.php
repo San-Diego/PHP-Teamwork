@@ -93,6 +93,8 @@
         </div>
         <!-- /.blog-main -->
         <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
+            Most popular tags: <br/>
+            <?php display_most_popular_tags(); ?>
             <?php if (!isset($_SESSION['user'])): ?>
                 <div class="sidebar-module sidebar-module-inset">
                     <a href="login.php">Log in</a><br/>
