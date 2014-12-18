@@ -673,17 +673,16 @@ function display_most_popular_tags() {
         foreach ($innerArr as $t) {
             if($i < 8) {
                 if($index % 2 == 0) {
-                    echo "$t visited ";
+                    echo "<li>$t visited ";
                     $index++;
                 } else {
                     if($t != 1) {
-                        echo "<li>$t times</li";
+                        echo "$t times</li>";
                         $index++;
                     } else {
-                        echo "<li>$t time</li>";
+                        echo "$t time</li>";
                         $index++;
                     }
-
                 }
                 $i++;
             }
