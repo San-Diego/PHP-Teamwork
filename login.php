@@ -57,8 +57,8 @@ if (!empty($_POST)) {
 
         $_SESSION['user'] = $row;
 
-        header("Location: index.php");
-        die("Redirecting to: index.php");
+        echo "<META http-equiv='refresh' content='0;URL='>";
+        die();
     } else {
 
         print("Login Failed.");

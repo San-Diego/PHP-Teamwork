@@ -95,7 +95,7 @@ if (!empty($_POST)) {
         die("Failed to run query: " . $ex->getMessage());
     }
 
-    header("Location: login.php");
+    echo "<META http-equiv='refresh' content='0;URL='>";
 
-    die("Redirecting to login.php");
+    die();
 }
