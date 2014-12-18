@@ -1,7 +1,7 @@
 <?php
 require_once('resources/init.php');
 
-if(isset($_SESSION['user'])) {
+if (isset($_SESSION['user'])) {
     header('Location: index.php');
     die('Already logged in, redirecting to index.php');
 }
@@ -11,7 +11,7 @@ include_once DX_ROOT_DIR . 'views/templates/default_template.php';
 
 $submitted_username = '';
 
-if(!empty($_POST)) {
+if (!empty($_POST)) {
 
     $query = "
             SELECT
@@ -42,8 +42,8 @@ if(!empty($_POST)) {
     $row = $stmt->fetch();
     if ($row) {
 
-		$salt = "hdhwYU*w(544OIOw";
-		$check_password = md5($_POST['password'] . $salt);
+        $salt = "hdhwYU*w(544OIOw";
+        $check_password = md5($_POST['password'] . $salt);
 
         if ($check_password === $row['password']) {
             $login_ok = true;
@@ -66,4 +66,3 @@ if(!empty($_POST)) {
         $submitted_username = htmlentities($_POST['username'], ENT_QUOTES, 'UTF-8');
     }
 }
-?>

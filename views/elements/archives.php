@@ -1,13 +1,14 @@
 <div class="container">
     <div class="blog-header">
         <h1 class="blog-title">Team San Diego Blog</h1>
+
         <p class="lead blog-description">This is the official SoftUni teamwork blog</p>
     </div>
     <div class="row">
         <div class="col-sm-8 blog-main">
             <?php
-				getArchivesArticles(htmlspecialchars($_GET['month']),(int)$_GET['year']);
-			?>
+            getArchivesArticles(htmlspecialchars($_GET['month']), (int)$_GET['year']);
+            ?>
         </div>
         <!-- /.blog-main -->
         <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
@@ -31,8 +32,8 @@
                 <h4>Archives</h4>
                 <ol class="list-unstyled">
                     <?php
-						getArchives();
-					?>
+                    getArchives();
+                    ?>
                 </ol>
             </div>
             <div class="sidebar-module">
@@ -43,6 +44,8 @@
                     <li><a href="#">Facebook</a></li>
                 </ol>
             </div>
-        </div><!-- /.blog-sidebar -->
-    </div><!-- /.row -->
+        </div>
+        <!-- /.blog-sidebar -->
+    </div>
+    <!-- /.row -->
 </div><!-- /.container -->

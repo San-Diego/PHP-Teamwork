@@ -16,7 +16,7 @@ $prev_page = $page - 1 < 1 ? 1 : $page - 1;
 $next_page = $page + 1 > $num_pages ? $num_pages : $page + 1;
 
 
-if($num_posts % $count_of_posts != 0) {
+if ($num_posts % $count_of_posts != 0) {
     $num_pages++;
 }
 
@@ -25,7 +25,7 @@ $posts = array_reverse($posts);
 
 $show_comments = count($posts) == 1;
 
-if($show_comments) {
+if ($show_comments) {
     $tags = get_tags_by_post($posts[0]['id']);
     $comments = get_comments($posts[0]['id']);
     increase_visits($posts[0]['id']);
@@ -33,8 +33,6 @@ if($show_comments) {
 // $element =  path to the html element you need e.g. form, aside, post... DX_ROOT_DIR . /views/elements/placeholder
 $element = 'views/elements/archives.php';
 include_once DX_ROOT_DIR . 'views/templates/default_template.php';
-
-?>
 
 
  

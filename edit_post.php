@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if($_SESSION['user']['admin'] != 1) {
+if ($_SESSION['user']['admin'] != 1) {
     header('Location: index.php');
     die();
 }
@@ -11,7 +11,7 @@ require_once('resources/init.php');
 $post = get_posts($_GET['id'], null, 0, 1);
 $post_id = $_GET['id'];
 
-if(isset($_POST['title'], $_POST['contents'], $_POST['category'])) {
+if (isset($_POST['title'], $_POST['contents'], $_POST['category'])) {
 
     $errors = array();
 
@@ -50,8 +50,8 @@ include_once DX_ROOT_DIR . 'views/templates/default_template.php';
 
 
 <?php
-if(isset($errors) && !empty($errors)) {
-    echo "<ul><li>".implode('</li><li>', $errors)."</li></ul>";
+if (isset($errors) && !empty($errors)) {
+    echo "<ul><li>" . implode('</li><li>', $errors) . "</li></ul>";
 }
 ?>
 

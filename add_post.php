@@ -1,13 +1,13 @@
 <?php
 session_start();
 
-if($_SESSION['user']['admin'] != 1) {
+if ($_SESSION['user']['admin'] != 1) {
     header('Location: index.php');
     die();
 }
 error_reporting(0);
 require_once('resources/init.php');
-if(isset($_POST['title'], $_POST['contents'], $_POST['category'], $_POST['tags'])) {
+if (isset($_POST['title'], $_POST['contents'], $_POST['category'], $_POST['tags'])) {
 
     $errors = array();
 
@@ -41,9 +41,9 @@ if(isset($_POST['title'], $_POST['contents'], $_POST['category'], $_POST['tags']
 
     if (empty($errors)) {
         add_tags($tags);
-        add_post($title,$contents,$_SESSION['user']['id'],get_category_id($_POST['category']), time());
+        add_post($title, $contents, $_SESSION['user']['id'], get_category_id($_POST['category']), time());
         $id = $db->lastInsertId();
-		add_tagsToPost($tags, $id);
+        add_tagsToPost($tags, $id);
         header("Location: index.php?id={$id}");
         die();
     }
@@ -55,8 +55,8 @@ include_once DX_ROOT_DIR . 'views/templates/default_template.php';
 
 
 <?php
-if(isset($errors) && !empty($errors)) {
-    echo "<ul><li>".implode('</li><li>', $errors)."</li></ul>";
+if (isset($errors) && !empty($errors)) {
+    echo "<ul><li>" . implode('</li><li>', $errors) . "</li></ul>";
 }
 ?>
 

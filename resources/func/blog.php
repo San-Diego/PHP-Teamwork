@@ -1,12 +1,11 @@
 <?php
-function add_post($title,$contents,$by,$cat,$time)
+function add_post($title, $contents, $by, $cat, $time)
 {
     global $db;
 
     $query = "INSERT INTO posts (title,article,author,cat_id,date) VALUES (:title,:contents,:author,:cat,:time)";
 
-    try
-    {
+    try {
         $stmt = $db->prepare($query);
         $stmt->bindParam(':title', $title);
         $stmt->bindParam(':contents', $contents);
@@ -14,8 +13,7 @@ function add_post($title,$contents,$by,$cat,$time)
         $stmt->bindParam(':cat', $cat);
         $stmt->bindParam(':time', $time);
         $stmt->execute();
-    }catch(PDOException $ex)
-    {
+    } catch (PDOException $ex) {
         //die("Failed to run query: ");
     }
 }
@@ -25,23 +23,23 @@ function getArchivesArticles($month, $year)
     global $db;
 
     $query = "SELECT * FROM posts";
-	try {
+    try {
         $stmt = $db->prepare($query);
         $stmt->execute();
-		$articles = $stmt->fetchAll();
-        
-        foreach($articles as $article) {
+        $articles = $stmt->fetchAll();
+
+        foreach ($articles as $article) {
             $date = $article['date'];
-			$DByear = date("Y",$date);
-            $DBmonth = date("F",$date);
-			
-			if($DByear==$year && $DBmonth==$month) {
-				$id = $article['id'];
-				$title = $article['title'];
-				echo "<h2 class='blog-post-title'><a
+            $DByear = date("Y", $date);
+            $DBmonth = date("F", $date);
+
+            if ($DByear == $year && $DBmonth == $month) {
+                $id = $article['id'];
+                $title = $article['title'];
+                echo "<h2 class='blog-post-title'><a
                         href='index.php?id=$id'>$title</a>
                 </h2>";
-			}
+            }
         }
     } catch (PDOException $ex) {
         die("Failed to run query: ");
@@ -53,10 +51,10 @@ function getArchives()
     global $db;
 
     $query = "SELECT date FROM posts";
-	try {
+    try {
         $stmt = $db->prepare($query);
         $stmt->execute();
-		$dates = $stmt->fetchAll();
+        $dates = $stmt->fetchAll();
         $years = array(
             2013 => array(
                 'January' => 0,
@@ -87,15 +85,15 @@ function getArchives()
                 'December' => 0,
             )
         );
-        foreach($dates as $date) {
-            $year = date("Y",$date['date']);
-            $month = date("F",$date['date']);
+        foreach ($dates as $date) {
+            $year = date("Y", $date['date']);
+            $month = date("F", $date['date']);
             $years[$year][$month]++;
         }
 
-        foreach($years as $yearKey => $year) {
-            foreach($year as $monthKey => $monthOutput) {
-                if($monthOutput>0){
+        foreach ($years as $yearKey => $year) {
+            foreach ($year as $monthKey => $monthOutput) {
+                if ($monthOutput > 0) {
                     echo "<li><a href='archive.php?month=$monthKey&year=$yearKey'>$monthKey $yearKey</a></li>";
                 }
             }
@@ -122,13 +120,11 @@ function edit_post($id, $title, $contents, $category)
         ':id' => $id
     );
 
-    try
-    {
+    try {
         // Execute the query to create the user
         $stmt = $db->prepare($query);
         $result = $stmt->execute($query_params);
-    }catch(PDOException $ex)
-    {
+    } catch (PDOException $ex) {
         die("Failed to run query: ");
     }
 }
@@ -159,7 +155,7 @@ function get_tags_by_post($id)
 
     $results = [];
 
-    foreach($tags_id as $tag_id) {
+    foreach ($tags_id as $tag_id) {
         $query = "
             SELECT
                 name
@@ -208,7 +204,7 @@ function get_posts_by_tag($tag)
     }
     $tag_id = $stmt->fetch()['id'];
 
-    if($tag_id) {
+    if ($tag_id) {
         $query = "
             SELECT
                 blog_post_id
@@ -229,7 +225,7 @@ function get_posts_by_tag($tag)
         $posts = $stmt->fetchAll();
         $return = [];
 
-        foreach($posts as $post) {
+        foreach ($posts as $post) {
             $query = "
             SELECT
                 id, title, author, cat_id, date
@@ -272,14 +268,11 @@ function add_category($name)
         ':name' => $name
     );
 
-    try
-    {
+    try {
         // Execute the query to create the user
         $stmt = $db->prepare($query);
         $result = $stmt->execute($query_params);
-    }
-    catch(PDOException $ex)
-    {
+    } catch (PDOException $ex) {
         die("Failed to run query: ");
     }
 }
@@ -363,13 +356,13 @@ function get_posts($id = null, $cat_id = null, $offset, $count)
 
     $query_params = array();
 
-    if(isset($id)) {
+    if (isset($id)) {
         $id = (int)$id;
         $query .= " WHERE id = :id";
         $query_params[':id'] = $id;
     }
 
-    if(isset($cat_id)) {
+    if (isset($cat_id)) {
         $cat_id = (int)$cat_id;
         $query .= " WHERE cat_id = :cat_id";
         $query_params[':cat_id'] = $cat_id;
@@ -388,7 +381,8 @@ function get_posts($id = null, $cat_id = null, $offset, $count)
     return $rows;
 }
 
-function increase_visits($id) {
+function increase_visits($id)
+{
     global $db;
 
     $query = "UPDATE posts SET visits=visits+1 WHERE id=:id";
@@ -397,22 +391,19 @@ function increase_visits($id) {
         ':id' => $id
     );
 
-    try
-    {
+    try {
         $stmt = $db->prepare($query);
         $stmt->execute($query_params);
-    }
-    catch(PDOException $ex)
-    {
+    } catch (PDOException $ex) {
         die("Failed to run query: ");
     }
 }
 
 function category_exist($name)
 {
-     global $db;
+    global $db;
 
-	 $query = "
+    $query = "
 	 SELECT
 	 1
 	 FROM cat
@@ -420,22 +411,22 @@ function category_exist($name)
 	 name = :name
 	 ";
 
-	 $query_params = array(
-	 ':name' => strtolower($name)
-	 );
+    $query_params = array(
+        ':name' => strtolower($name)
+    );
 
-	 try {
-	 $stmt = $db->prepare($query);
-	 $stmt->execute($query_params);
-	 } catch (PDOException $ex) {
-	 die("Failed to run query: ");
-	 }
+    try {
+        $stmt = $db->prepare($query);
+        $stmt->execute($query_params);
+    } catch (PDOException $ex) {
+        die("Failed to run query: ");
+    }
 
-	 $row = $stmt->fetch();
-	 if ($row) {
-	 return true;
-	 }
-	 return false;
+    $row = $stmt->fetch();
+    if ($row) {
+        return true;
+    }
+    return false;
 }
 
 function get_categories()
@@ -459,7 +450,8 @@ function get_categories()
     return $rows;
 }
 
-function remove_posts_category($cat_id) {
+function remove_posts_category($cat_id)
+{
     global $db;
 
     $query = "UPDATE posts SET cat_id = 0 WHERE cat_id = :cat_id";
@@ -477,7 +469,8 @@ function remove_posts_category($cat_id) {
 
 }
 
-function add_tags($name) {
+function add_tags($name)
+{
     global $db;
 
     foreach ($name as $tag) {
@@ -487,16 +480,16 @@ function add_tags($name) {
         $query_params = array(
             ':tag' => $t
         );
-        try    {
+        try {
             $stmt = $db->prepare($query);
             $stmt->execute($query_params);
             $result = $stmt->fetch();
             $tag_id = $result['id'];
-        }catch(PDOException $ex)    {
+        } catch (PDOException $ex) {
             die("Failed to run query: ");
         }
 
-        if(empty($result)) {
+        if (empty($result)) {
             $query = "INSERT INTO tags SET
                     name = :tag, count = 1";
 
@@ -546,7 +539,8 @@ function decrease_tag_count($tag_name)
     }
 }
 
-function add_tagsToPost($name, $id) {
+function add_tagsToPost($name, $id)
+{
     global $db;
 
     foreach ($name as $tag) {
@@ -555,27 +549,28 @@ function add_tagsToPost($name, $id) {
         $query_params = array(
             ':tag' => $tag
         );
-        try    {
+        try {
             $stmt = $db->prepare($query);
             $stmt->execute($query_params);
-        }catch(PDOException $ex)    {
+        } catch (PDOException $ex) {
             die("Failed to run query: ");
         }
 
         $tag_id = $stmt->fetch()['id'];
 
-            $query = "INSERT INTO blog_post_tags SET
+        $query = "INSERT INTO blog_post_tags SET
                     tag_id = {$tag_id}, blog_post_id = {$id}";
-        try    {
+        try {
             $stmt = $db->prepare($query);
             $stmt->execute();
-        }catch(PDOException $ex)    {
+        } catch (PDOException $ex) {
             die("Failed to run query: ");
         }
     }
 }
 
-function add_comment($post_ID, $user_name, $content) {
+function add_comment($post_ID, $user_name, $content)
+{
     global $db;
 
     $query = "
@@ -592,20 +587,18 @@ function add_comment($post_ID, $user_name, $content) {
         ':post_ID' => $post_ID
     );
 
-    try
-    {
+    try {
         $stmt = $db->prepare($query);
         $stmt->execute($query_params);
-    }
-    catch(PDOException $ex)
-    {
+    } catch (PDOException $ex) {
         var_dump($ex);
         die("Error");
         //return false;
     }
 }
 
-function get_comments($post_id) {
+function get_comments($post_id)
+{
     global $db;
 
     $query = "
@@ -630,7 +623,8 @@ function get_comments($post_id) {
     return $rows;
 }
 
-function get_number_of_rows($tab, $col) {
+function get_number_of_rows($tab, $col)
+{
     global $db;
 
     $query = "SELECT COUNT(:col) FROM $tab";
@@ -648,5 +642,6 @@ function get_number_of_rows($tab, $col) {
 
     return $stmt->fetch()["COUNT('$col')"];
 }
+
 ?>
  

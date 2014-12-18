@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if($_SESSION['user']['admin'] != 1) {
+if ($_SESSION['user']['admin'] != 1) {
     header('Location: index.php');
     die();
 }
@@ -14,4 +14,3 @@ delete('comments', $id, 'id');
 
 header("Location: index.php?id={$post_ID}");
 die();
-?>

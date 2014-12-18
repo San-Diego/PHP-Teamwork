@@ -1,6 +1,7 @@
 <div class="container">
     <div class="blog-header">
         <h1 class="blog-title">Awesome Blog</h1>
+
         <p class="lead blog-description">This is the official PHP teamwork blog</p>
     </div>
     <div class="row">
@@ -20,7 +21,8 @@
                     <nav>
                         <div class="btn-group">
                             <button type="button" class="btn btn-primary">Action</button>
-                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
+                                    aria-expanded="false">
                                 <span class="caret"></span>
                                 <span class="sr-only">Toggle Dropdown</span>
                             </button>
@@ -38,7 +40,8 @@
                     <p class="blog-post-meta">
                         Tagged:
                         <?php foreach ($tags as $tag): ?>
-                            <a class="btn btn-xs btn-primary" href="search.php?search=<?php echo $tag ?>"><?php echo htmlentities($tag) ?></a>
+                            <a class="btn btn-xs btn-primary"
+                               href="search.php?search=<?php echo $tag ?>"><?php echo htmlentities($tag) ?></a>
                         <?php endforeach ?>
                     </p>
                     <form method="post" action="add_comment.php">
@@ -47,8 +50,9 @@
                             <input type="text" name="user_name" id="userName"/><br/>
                         <?php endif ?>
                         <label for="comment">Write a new comment:</label>
+
                         <div class="form-group">
-                        <textarea class="form-control" name="content" id="comment" rows="5"></textarea>
+                            <textarea class="form-control" name="content" id="comment" rows="5"></textarea>
                         </div>
                         <input type="submit" class="btn" value="Add comment"/>
                         <input type="hidden" name="post_id" value="<?php echo $post['id'] ?>"/>
@@ -57,10 +61,14 @@
                         <div id="comment">
                             <hr>
                             <p>Comment by: <?php echo htmlentities($comment['user_name']) ?></p>
+
                             <p>Comment:<br/><?php echo htmlentities($comment['content']) ?></p>
                             <?php if (isset($_SESSION['user']) && $_SESSION['user']['admin'] == 1): ?>
-                                <button onclick="location='delete_comment.php?id=<?php echo $comment['id'] ?>&post_ID=<?php echo $post['id'] ?>'" type="button" class="btn btn-primary btn-sm">
-                                    <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span> Remove comment
+                                <button
+                                    onclick="location='delete_comment.php?id=<?php echo $comment['id'] ?>&post_ID=<?php echo $post['id'] ?>'"
+                                    type="button" class="btn btn-primary btn-sm">
+                                    <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span> Remove
+                                    comment
                                 </button>
                             <?php endif ?>
                         </div>
@@ -68,19 +76,19 @@
                 <?php endif ?>
             <?php endforeach;
             if (!$show_comments) :?>
-            <nav>
-                <ul class="pagination">
-                    <li><a href="index.php?page=1">&lt;&lt;</a></li>
-                    <li><a href="index.php?page=<?php echo $prev_page ?>">&lt;</a></li>
-                    <?php for ($i = $first_page; $i <= $last_page; $i++): ?>
-                        <li class="<?php if ($i == $page) {
-                            echo 'active';
-                        } ?>"><a href="index.php?page=<?php echo $i ?>"><?php echo $i ?></a></li>
-                    <?php endfor ?>
-                    <li><a href="index.php?page=<?php echo $next_page ?>">&gt;</a></li>
-                    <li><a href="index.php?page=<?php echo $num_pages ?>">&gt;&gt;</a></li>
-                </ul>
-            </nav>
+                <nav>
+                    <ul class="pagination">
+                        <li><a href="index.php?page=1">&lt;&lt;</a></li>
+                        <li><a href="index.php?page=<?php echo $prev_page ?>">&lt;</a></li>
+                        <?php for ($i = $first_page; $i <= $last_page; $i++): ?>
+                            <li class="<?php if ($i == $page) {
+                                echo 'active';
+                            } ?>"><a href="index.php?page=<?php echo $i ?>"><?php echo $i ?></a></li>
+                        <?php endfor ?>
+                        <li><a href="index.php?page=<?php echo $next_page ?>">&gt;</a></li>
+                        <li><a href="index.php?page=<?php echo $num_pages ?>">&gt;&gt;</a></li>
+                    </ul>
+                </nav>
             <?php endif ?>
         </div>
         <!-- /.blog-main -->
@@ -105,8 +113,8 @@
                 <h4>Archives</h4>
                 <ol class="list-unstyled">
                     <?php
-						getArchives();
-					?>
+                    getArchives();
+                    ?>
                 </ol>
             </div>
             <div class="sidebar-module">
@@ -115,6 +123,8 @@
                     <li><a href="http://github.com/San-Diego/PHP-Teamwork" target="_blank">GitHub</a></li>
                 </ol>
             </div>
-        </div><!-- /.blog-sidebar -->
-    </div><!-- /.row -->
+        </div>
+        <!-- /.blog-sidebar -->
+    </div>
+    <!-- /.row -->
 </div><!-- /.container -->

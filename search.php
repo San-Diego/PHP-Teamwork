@@ -1,7 +1,7 @@
 <?php
 require_once('resources/init.php');
 
-if(!isset($_GET['search'])) {
+if (!isset($_GET['search'])) {
     header("Location: index.php");
     die();
 }
@@ -9,17 +9,17 @@ if(!isset($_GET['search'])) {
 $tags = explode(',', $_GET['search']);
 $posts = [];
 
-foreach($tags as $tag) {
+foreach ($tags as $tag) {
     $tmp = get_posts_by_tag($tag);
 
-    if($tmp != null) {
-    $posts = array_merge($posts, $tmp);
+    if ($tmp != null) {
+        $posts = array_merge($posts, $tmp);
     }
 }
 
 for ($i = 0; isset($posts[$i]); $i++) {
     $c = 0;
-    for($c = 0; $i > $c; $c++) {
+    for ($c = 0; $i > $c; $c++) {
         if ($posts[$i]['id'] == $posts[$c]['id']) {
             unset($posts[$i]);
         }
@@ -28,4 +28,3 @@ for ($i = 0; isset($posts[$i]); $i++) {
 
 $element = 'views/elements/search_results.php';
 include_once DX_ROOT_DIR . 'views/templates/default_template.php';
-?>
