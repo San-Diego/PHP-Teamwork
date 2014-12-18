@@ -16,7 +16,7 @@ function add_post($title,$contents,$by,$cat,$time)
         $stmt->execute();
     }catch(PDOException $ex)
     {
-        die("Failed to run query: ");
+        //die("Failed to run query: ");
     }
 }
 
@@ -599,7 +599,9 @@ function add_comment($post_ID, $user_name, $content) {
     }
     catch(PDOException $ex)
     {
-        die("Failed to run query: ");
+        var_dump($ex);
+        die("Error");
+        //return false;
     }
 }
 
