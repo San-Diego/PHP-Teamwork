@@ -93,8 +93,6 @@
         </div>
         <!-- /.blog-main -->
         <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
-            Most popular tags: <br/>
-            <?php display_most_popular_tags(); ?>
             <?php if (!isset($_SESSION['user'])): ?>
                 <div class="sidebar-module sidebar-module-inset">
                     <a href="login.php">Log in</a><br/>
@@ -110,6 +108,12 @@
 
                 <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet
                     fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
+            </div>
+            <div class="sidebar-module">
+                <h4>Most popular tags<h4>
+                        <ol>
+                           <li><?php display_most_popular_tags(); ?></li>
+                        </ol>
             </div>
             <div class="sidebar-module">
                 <h4>Archives</h4>

@@ -677,10 +677,10 @@ function display_most_popular_tags() {
                     $index++;
                 } else {
                     if($t != 1) {
-                        echo "$t times <br>";
+                        echo "$t times";
                         $index++;
                     } else {
-                        echo "$t time <br>";
+                        echo "$t time";
                         $index++;
                     }
 
@@ -690,6 +690,3 @@ function display_most_popular_tags() {
         }
     }
 }
-
-?>
- 
