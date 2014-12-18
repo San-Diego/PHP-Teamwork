@@ -11,7 +11,7 @@ if (isset($_POST['title'], $_POST['contents'], $_POST['category'], $_POST['tags'
 
     $errors = array();
 
-    $title = trim($_POST['title']);
+    $title = htmlentities(trim($_POST['title']));
     $tags = explode(",", strtolower($_POST['tags']));
     $tags = array_map('trim', $tags);
 
